@@ -15,18 +15,18 @@ pages_build_output_dir = "dist"
 #   5.  redeploy
 # This also restores local backend testing via `wrangler pages dev`.
 #
-# [[d1_databases]]
-# binding = "DB"
-# database_name = "brightjuly-entries"
-# database_id = "PASTE-REAL-DATABASE-ID-HERE"
-# migrations_dir = "migrations"
-#
-# [[r2_buckets]]
-# binding = "PHOTOS"
-# bucket_name = "brightjuly-photos"
+[[d1_databases]]
+binding = "DB"
+database_name = "brightjuly-entries"
+database_id = "e918a8c5-a0fc-4826-9221-2b2c38a16136"
+migrations_dir = "migrations"
+
+[[r2_buckets]]
+binding = "PHOTOS"
+bucket_name = "brightjuly-photos"
 
 # Non-secret Brevo config. The sender (Bright July <noreply@brightjuly.com.au>) is
 # hardcoded in functions/api/entry.ts. BREVO_API_KEY is a dashboard secret.
 [vars]
-BREVO_MARKETING_LIST_ID = ""
+BREVO_MARKETING_LIST_ID = "4"
 BREVO_TEMPLATE_ID = ""

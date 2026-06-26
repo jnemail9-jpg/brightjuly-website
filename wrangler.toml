@@ -4,17 +4,10 @@ compatibility_date = "2026-06-25"
 pages_build_output_dir = "dist"
 
 # ── Backend bindings (D1 + R2) ──────────────────────────────────────────────
-# Commented out so Cloudflare Pages can deploy NOW: Pages fails the deployment if
-# a binding points at a D1 database / R2 bucket that doesn't exist yet.
-#
-# To enable the competition backend (entries + photo uploads), one-time:
-#   1.  wrangler d1 create brightjuly-entries          # copy the printed database_id
-#   2.  wrangler r2 bucket create brightjuly-photos --location=apac
-#   3.  paste the real database_id below, then uncomment BOTH blocks
-#   4.  wrangler d1 migrations apply brightjuly-entries --remote
-#   5.  redeploy
-# This also restores local backend testing via `wrangler pages dev`.
-#
+# Live: the competition entries DB + photo-upload bucket exist and are bound.
+# To recreate from scratch: `wrangler d1 create brightjuly-entries`,
+# `wrangler r2 bucket create brightjuly-photos --location=apac`, then
+# `wrangler d1 migrations apply brightjuly-entries --remote`.
 [[d1_databases]]
 binding = "DB"
 database_name = "brightjuly-entries"

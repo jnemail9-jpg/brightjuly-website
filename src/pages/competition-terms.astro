@@ -1,0 +1,151 @@
+---
+import { Icon } from "astro-icon/components";
+import Layout from "../layouts/Layout.astro";
+
+const steps = [
+  { n: "01", icon: "lucide:user-plus", title: "Sign Up Your Family", d: "Register in under a minute. We'll send a welcome note with everything you need to begin." },
+  { n: "02", icon: "lucide:users", title: "Form A Squad", d: "Invite your household, cousins, or another family. Squads of 2–6 people work best." },
+  { n: "03", icon: "lucide:message-circle-heart", title: "Post A Pledge", d: "Share a short note about how your family wants to get outside more this July." },
+  { n: "04", icon: "lucide:calendar-check", title: "Track Through July", d: "Notice your outdoor moments through the month. No daily logging required." },
+  { n: "05", icon: "lucide:gift", title: "Submit Your Entry", d: "At the end of July, submit one photo entry with #BrightJuly to go into the draw." },
+];
+
+const faqs = [
+  { q: "Do I need to log every day?", a: "No. Bright July is intentionally light touch. You only submit a single entry at the end of the month: one photo and a short note." },
+  { q: "Who can join?", a: "Any family in Australia with at least one child under 18. Squads can mix households (e.g. cousins, friends, neighbours)." },
+  { q: "How are winners selected?", a: "A panel of judges reviews all eligible submissions and selects winners based on how well the entry embodies the Bright July mission and the creativity of the submission." },
+  { q: "Is there a cost?", a: "No. Bright July is free to join and free to enter." },
+  { q: "When does it run?", a: "July 1 – July 31. Entries close 11:59pm AEST on August 3." },
+];
+
+const terms = [
+  { t: "1. Eligibility", d: "Open to Australian residents aged 18+ entering on behalf of a family or household that includes at least one child under 18. Bright July organisers, sponsors and their immediate families are not eligible to win prizes." },
+  { t: "2. Competition Period", d: "Entries open 12:01am AEST 1 July and close 11:59pm AEST 3 August. One entry per family squad." },
+  { t: "3. How To Enter", d: "Register at brightjuly.com.au, form your squad, and submit one photo entry with the hashtag #BrightJuly via the entry form before the closing date." },
+  { t: "4. Prizes", d: "Prize details, totals and supplier partners will be listed in the final Terms document. Prizes are non-transferable and cannot be redeemed for cash." },
+  { t: "5. Winner Selection", d: "Winners will be selected by a panel of judges within 14 days of entries closing. Selection is based on how well the submission embodies the Bright July mission and the creativity of the entry. The judges' decision is final." },
+  { t: "6. Use Of Submissions", d: "By entering, participants grant Bright July a non-exclusive licence to share submitted photos on campaign channels with attribution. Participants retain full ownership of their content." },
+];
+---
+
+<Layout
+  title="How Bright July Works | Competition Details & T&Cs"
+  description="Full details on how the Bright July family outdoor light competition works, eligibility, prizes, and Terms & Conditions."
+  canonical="/competition-terms"
+>
+  <div class="bj-page">
+    {/* Header */}
+    <header class="border-b" style="border-color:var(--color-line);background:rgba(250,246,239,0.92);backdrop-filter:blur(10px)">
+      <div class="max-w-7xl mx-auto px-6 md:px-10 h-16 flex items-center justify-between">
+        <a href="/" class="flex items-center gap-2 text-sm tracking-wide" style="color:var(--color-charcoal)">
+          <Icon name="lucide:sun" class="w-4 h-4" style="color:var(--color-amber-deep)" />
+          <span class="serif text-lg">Bright July</span>
+        </a>
+        <a href="/" class="inline-flex items-center gap-2 text-xs tracking-widest uppercase" style="color:var(--color-muted)">
+          <Icon name="lucide:arrow-left" class="w-3.5 h-3.5" /> Back Home
+        </a>
+      </div>
+    </header>
+
+    {/* Hero */}
+    <section class="py-20 md:py-28">
+      <div class="max-w-4xl mx-auto px-6 md:px-10">
+        <span class="bj-eyebrow" style="color:var(--color-amber-deep)">The Full Story</span>
+        <div class="bj-rule mt-4 mb-7" style="background:var(--color-amber-deep);width:48px;opacity:1"></div>
+        <h1 class="text-5xl md:text-6xl leading-[1.04]">How Bright July<br />Works.</h1>
+        <p class="mt-7 text-base md:text-lg leading-[1.75] max-w-2xl" style="color:var(--color-ink)">
+          A simple, month-long invitation for families to spend more bright moments outdoors,
+          together. Below is the full picture: the five steps, eligibility, prizes, and the fine
+          print that keeps things fair.
+        </p>
+      </div>
+    </section>
+
+    {/* Steps */}
+    <section class="py-16 md:py-24" style="background:var(--color-cream-soft)">
+      <div class="max-w-6xl mx-auto px-6 md:px-10">
+        <span class="bj-eyebrow" style="color:var(--color-amber-deep)">The Five Steps</span>
+        <div class="bj-rule mt-4 mb-7" style="background:var(--color-amber-deep);width:48px;opacity:1"></div>
+        <h2 class="text-4xl md:text-5xl leading-[1.05]">From Sign-Up<br />To Submission.</h2>
+
+        <ol class="mt-14 space-y-5">
+          {steps.map((s) => (
+            <li class="rounded-[20px] p-6 md:p-8 flex items-start gap-6 bg-white" style="border:1px solid var(--color-line)">
+              <span class="serif text-3xl md:text-4xl shrink-0" style="color:var(--color-amber-deep)">{s.n}</span>
+              <span class="inline-flex items-center justify-center w-11 h-11 rounded-full shrink-0" style="background:var(--color-amber-soft);color:var(--color-amber-deep)">
+                <Icon name={s.icon} class="w-5 h-5" />
+              </span>
+              <div>
+                <h3 class="text-xl md:text-2xl">{s.title}</h3>
+                <p class="mt-2 text-sm md:text-base leading-relaxed" style="color:var(--color-muted)">{s.d}</p>
+              </div>
+            </li>
+          ))}
+        </ol>
+      </div>
+    </section>
+
+    {/* FAQ */}
+    <section class="py-20 md:py-28">
+      <div class="max-w-4xl mx-auto px-6 md:px-10">
+        <span class="bj-eyebrow" style="color:var(--color-amber-deep)">Common Questions</span>
+        <div class="bj-rule mt-4 mb-7" style="background:var(--color-amber-deep);width:48px;opacity:1"></div>
+        <h2 class="text-4xl md:text-5xl leading-[1.05]">Good To Know.</h2>
+        <div class="mt-12">
+          {faqs.map((f) => (
+            <div class="py-7" style="border-top:1px solid var(--color-line)">
+              <h3 class="text-lg md:text-xl">{f.q}</h3>
+              <p class="mt-3 text-sm md:text-base leading-relaxed" style="color:var(--color-muted)">{f.a}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    {/* Competition Terms */}
+    <section id="terms" class="py-20 md:py-28" style="background:var(--color-cream)">
+      <div class="max-w-4xl mx-auto px-6 md:px-10">
+        <div class="flex items-center gap-3">
+          <Icon name="lucide:shield-check" class="w-5 h-5" style="color:var(--color-amber-deep)" />
+          <span class="bj-eyebrow" style="color:var(--color-amber-deep)">Terms &amp; Conditions</span>
+        </div>
+        <div class="bj-rule mt-4 mb-7" style="background:var(--color-amber-deep);width:48px;opacity:1"></div>
+        <h2 class="text-4xl md:text-5xl leading-[1.05]">Competition Terms.</h2>
+        <p class="mt-6 text-sm" style="color:var(--color-muted)">
+          <em>Placeholder: full Terms &amp; Conditions to be published before campaign launch.</em>
+        </p>
+
+        <div class="mt-10 space-y-7 text-base leading-[1.85]" style="color:var(--color-ink)">
+          {terms.map((item) => (
+            <div>
+              <h3 class="text-xl mb-2">{item.t}</h3>
+              <p style="color:var(--color-muted)">{item.d}</p>
+            </div>
+          ))}
+          <div>
+            <h3 class="text-xl mb-2">7. Privacy</h3>
+            <p style="color:var(--color-muted)">
+              Personal information is handled in line with our <a href="/privacy" class="underline" style="color:var(--color-amber-deep)">Privacy Policy</a>.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    {/* CTA */}
+    <section class="py-20 md:py-28" style="background:var(--color-cream-soft)">
+      <div class="max-w-3xl mx-auto px-6 md:px-10 text-center">
+        <Icon name="lucide:sparkles" class="w-6 h-6 mx-auto" style="color:var(--color-amber-deep)" />
+        <h2 class="mt-6 text-4xl md:text-5xl leading-[1.05]">Ready When You Are.</h2>
+        <div class="mt-10 flex flex-col sm:flex-row items-center justify-center gap-3">
+          <a href="/competition" class="bj-btn-amber inline-flex items-center justify-center px-8 py-4 rounded-full text-sm font-medium tracking-wide">
+            Join Bright July
+          </a>
+          <a href="/" class="inline-flex items-center justify-center px-8 py-4 rounded-full text-sm font-medium tracking-wide bg-white" style="color:var(--color-charcoal);border:1px solid var(--color-line)">
+            Back To Homepage
+          </a>
+        </div>
+      </div>
+    </section>
+  </div>
+</Layout>

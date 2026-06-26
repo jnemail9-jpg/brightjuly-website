@@ -1,0 +1,29 @@
+{
+  "name": "brightjuly-website",
+  "type": "module",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "astro dev",
+    "start": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "cf:preview": "astro build && wrangler pages dev",
+    "astro": "astro"
+  },
+  "dependencies": {
+    "@astrojs/sitemap": "3.7.3",
+    "@fontsource-variable/dm-sans": "^5.2.8",
+    "@fontsource/dm-serif-display": "^5.2.8",
+    "@iconify-json/lucide": "1.2.114",
+    "@tailwindcss/vite": "4.3.1",
+    "astro": "5.18.2",
+    "astro-icon": "1.1.5",
+    "sharp": "0.34.4",
+    "tailwindcss": "4.3.1"
+  },
+  "devDependencies": {
+    "@cloudflare/workers-types": "^4.20260625.1",
+    "wrangler": "^4.104.0"
+  }
+}

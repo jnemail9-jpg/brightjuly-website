@@ -1,0 +1,51 @@
+---
+import { Icon } from "astro-icon/components";
+
+export interface Props {
+  n: string;
+  date: string;
+  title: string;
+  d: string;
+  featured?: boolean;
+  /** YouTube video/premiere ID. When set, the card becomes a click-to-load embed.
+   *  When empty, it renders the styled "coming soon" placeholder. */
+  videoId?: string;
+}
+const { n, date, title, d, featured = false, videoId } = Astro.props;
+
+const watchUrl = videoId ? `https://www.youtube.com/watch?v=${videoId}` : null;
+const embedUrl = videoId
+  ? `https://www.youtube-nocookie.com/embed/${videoId}?autoplay=1&rel=0`
+  : null;
+const thumbUrl = videoId ? `https://i.ytimg.com/vi/${videoId}/hqdefault.jpg` : null;
+---
+
+<article class:list={["bj-episode-card", { featured }]}>
+  {
+    videoId ? (
+      <a
+        class="bj-video-placeholder bj-yt-facade"
+        href={watchUrl}
+        data-embed={embedUrl}
+        target="_blank"
+        rel="noopener"
+        aria-label={`Play episode ${n}: ${title}`}
+        style={`background-image:linear-gradient(135deg, rgba(217,142,63,0.55), rgba(63,127,122,0.5)), url(${thumbUrl})`}
+      >
+        <span class="ep-num">Episode {n}</span>
+        <div class="bj-play-button"><Icon name="lucide:play" class="w-4 h-4 ml-0.5" /></div>
+      </a>
+    ) : (
+      <div class="bj-video-placeholder">
+        <span class="ep-num">Episode {n}</span>
+        <span class="bj-soon-pill">Premieres {date}</span>
+        <div class="bj-play-button"><Icon name="lucide:play" class="w-4 h-4 ml-0.5" /></div>
+      </div>
+    )
+  }
+  <div class="bj-episode-content">
+    <p class="bj-drop-date">{date}</p>
+    <h3>{title}</h3>
+    <p class="ep-desc">{d}</p>
+  </div>
+</article>

@@ -1,0 +1,93 @@
+---
+import { Icon } from "astro-icon/components";
+
+export interface Props {
+  brandHref?: string;
+  links: { label: string; href: string }[];
+  cta: { label: string; href: string };
+}
+const { brandHref = "/", links, cta } = Astro.props;
+---
+
+<header class="fixed top-0 left-0 right-0 z-50 bj-glass" style="border-bottom:1px solid var(--color-line)">
+  <div class="max-w-7xl mx-auto px-6 md:px-10 h-16 md:h-[72px] flex items-center justify-between gap-4">
+    <a href={brandHref} class="flex items-baseline gap-3 shrink-0">
+      <span class="serif text-xl md:text-2xl whitespace-nowrap" style="color:var(--color-charcoal)">Bright July</span>
+      <span class="hidden sm:inline text-[11px] tracking-[0.22em] uppercase whitespace-nowrap" style="color:var(--color-muted)">A Family Outdoor Movement</span>
+    </a>
+
+    <nav class="hidden lg:flex items-center gap-8 text-sm whitespace-nowrap" style="color:var(--color-ink)">
+      {links.map((l) => <a href={l.href} class="hover:opacity-70">{l.label}</a>)}
+    </nav>
+
+    <div class="flex items-center gap-2 shrink-0">
+      <a href={cta.href} class="bj-btn-primary text-sm font-medium px-5 py-2.5 rounded-full whitespace-nowrap hidden lg:inline-flex">
+        {cta.label}
+      </a>
+      <button
+        type="button"
+        id="bj-nav-toggle"
+        class="bj-nav-burger inline-flex items-center justify-center lg:hidden"
+        aria-label="Open menu"
+        aria-expanded="false"
+        aria-controls="bj-mobile-nav"
+      >
+        <Icon name="lucide:menu" class="w-6 h-6 bj-burger-open" />
+        <Icon name="lucide:x" class="w-6 h-6 bj-burger-close" />
+      </button>
+    </div>
+  </div>
+
+  <div id="bj-mobile-nav" class="bj-mobnav-panel lg:hidden" hidden>
+    <nav class="max-w-7xl mx-auto px-6 py-3 flex flex-col">
+      {links.map((l) => <a href={l.href} class="bj-mobnav-link">{l.label}</a>)}
+      <a href={cta.href} class="bj-btn-primary mt-4 inline-flex items-center justify-center px-5 py-3 rounded-full text-sm font-semibold tracking-wide">
+        {cta.label}
+      </a>
+    </nav>
+  </div>
+</header>
+
+<script>
+  // Mobile nav toggle: accessible (aria-expanded), animated, closes on
+  // link click / Escape / outside click.
+  const btn = document.getElementById("bj-nav-toggle");
+  const panel = document.getElementById("bj-mobile-nav");
+  if (btn && panel) {
+    const setOpen = (open: boolean) => {
+      btn.setAttribute("aria-expanded", String(open));
+      btn.setAttribute("aria-label", open ? "Close menu" : "Open menu");
+      btn.classList.toggle("is-open", open);
+      if (open) {
+        panel.hidden = false;
+        requestAnimationFrame(() => panel.classList.add("is-open"));
+      } else {
+        panel.classList.remove("is-open");
+        panel.addEventListener(
+          "transitionend",
+          () => {
+            if (!panel.classList.contains("is-open")) panel.hidden = true;
+          },
+          { once: true }
+        );
+      }
+    };
+    btn.addEventListener("click", () =>
+      setOpen(btn.getAttribute("aria-expanded") !== "true")
+    );
+    panel.querySelectorAll("a").forEach((a) =>
+      a.addEventListener("click", () => setOpen(false))
+    );
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "Escape" && btn.getAttribute("aria-expanded") === "true") setOpen(false);
+    });
+    document.addEventListener("click", (e) => {
+      if (
+        btn.getAttribute("aria-expanded") === "true" &&
+        !panel.contains(e.target as Node) &&
+        !btn.contains(e.target as Node)
+      )
+        setOpen(false);
+    });
+  }
+</script>

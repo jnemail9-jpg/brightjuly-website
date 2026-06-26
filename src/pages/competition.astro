@@ -1,0 +1,438 @@
+---
+import { Image } from "astro:assets";
+import { Icon } from "astro-icon/components";
+import Layout from "../layouts/Layout.astro";
+import TagCallout from "../components/TagCallout.astro";
+import Nav from "../components/Nav.astro";
+import { luxiLogo, ideaPuddle, ideaClouds, social3 as ideaLoop } from "../data/images.ts";
+
+// Turnstile public site key (falls back to Cloudflare's "always passes" test key).
+const turnstileSiteKey =
+  import.meta.env.PUBLIC_TURNSTILE_SITE_KEY ?? "1x00000000000000000000AA";
+
+const DEADLINES = [
+  { day: "7", month: "Jul", weekday: "Tue", label: "Week 1" },
+  { day: "14", month: "Jul", weekday: "Tue", label: "Week 2" },
+  { day: "21", month: "Jul", weekday: "Tue", label: "Week 3" },
+  { day: "28", month: "Jul", weekday: "Tue", label: "Week 4" },
+];
+
+const WINNERS = [
+  "Mon 13 Jul, Week 1 winners",
+  "Mon 20 Jul, Week 2 winners",
+  "Mon 27 Jul, Week 3 winners",
+  "Mon 3 Aug, Week 4 winners",
+];
+
+const FAQ = [
+  { q: "Who can enter the Bright July competition?", a: "Any Australian family. Parents or guardians enter on behalf of their household." },
+  { q: "How do I enter?", a: "First, make a pledge as a family and write it down together, a simple shared commitment for the month. Then submit a weekly entry using the form on this page. Sharing on social with #BrightJuly is encouraged but not required, for private entries, just provide a caption and a screenshot of your private post (screenshot optional)." },
+  { q: "How are entries judged?", a: "Entries are judged, not randomly drawn, based on creativity, authentic family participation, alignment with the Bright July mission, storytelling, and the most creative outdoor journey." },
+  { q: "Can I enter privately without posting on social media?", a: "Yes. For private entries, just provide a caption and a screenshot of your private post (screenshot optional) via the entry form. The #BrightJuly hashtag is encouraged but not required." },
+  { q: "Can I submit more than once?", a: "Yes. You're encouraged to submit a new entry each week of the campaign." },
+  { q: "When are winners announced?", a: "Weekly winners are announced the Monday after each Tuesday 5pm AEST deadline: Mon 13 Jul (Week 1), Mon 20 Jul (Week 2), Mon 27 Jul (Week 3) and Mon 3 Aug (Week 4)." },
+  { q: "Is there a cost to join?", a: "No. Bright July is free for every family." },
+  { q: "What about photos of my children?", a: "Only share what you're comfortable with. See our Privacy Policy and Competition T&Cs for full details." },
+];
+
+const steps = [
+  { n: "01", title: "Post & Tag", d: "Share your outdoor moment on social media. Tag Bright July and use #BrightJuly." },
+  { n: "02", title: "Submit", d: "Register your family squad and submit your entry using the form below." },
+  { n: "03", title: "Win", d: "Win exciting weekly prizes. Two pairs of premium sunglasses awarded each week for the best outdoor moments." },
+];
+
+const tips = [
+  { tag: "Rain-Friendly", title: "🌧️ Puddle Walk Adventure", d: "Pull on your gumboots and head out to find the biggest puddle and the best splash.", img: ideaPuddle },
+  { tag: "Nature Discovery", title: "☁️ Rainy Day Explorer Challenge", d: "Listen for raindrops, search for cloud shapes and keep a small outdoor journal.", img: ideaClouds },
+  { tag: "After School", title: "After-school light loop", d: "Take the long way home for fifteen minutes of daylight before screens take over.", img: ideaLoop },
+];
+
+const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: FAQ.map((f) => ({
+    "@type": "Question",
+    name: f.q,
+    acceptedAnswer: { "@type": "Answer", text: f.a },
+  })),
+};
+---
+
+<Layout
+  title="Outdoor Light Challenge | Bright July Competition"
+  description="Enter the Bright July Outdoor Light Challenge, submit your family's weekly outdoor moment and win premium sunglasses."
+  canonical="/competition"
+  schema={[faqSchema]}
+>
+  <main class="bj-page">
+    {/* Sticky Nav */}
+    <Nav
+      brandHref="/"
+      links={[
+        { label: "How It Works", href: "/#how" },
+        { label: "Outdoor Ideas", href: "/#ideas" },
+        { label: "Community", href: "/#community" },
+        { label: "Competition", href: "/competition" },
+      ]}
+      cta={{ label: "Submit Your Entry", href: "#entry" }}
+    />
+
+    {/* HERO */}
+    <section id="top" class="pt-32 md:pt-40 pb-16 md:pb-24 bj-amber-grad">
+      <div class="max-w-5xl mx-auto px-6 md:px-10 text-center">
+        <Icon name="lucide:trophy" class="w-8 h-8 mx-auto" style="color:var(--color-amber-deep)" />
+        <span class="bj-eyebrow block mt-5">Bright July Competition</span>
+        <h1 class="mt-6 text-5xl md:text-7xl leading-[1.02]">
+          <span style="color:var(--color-amber-deep)">#BrightJuly</span><br />Outdoor Light Challenge.
+        </h1>
+        <p class="mt-7 max-w-2xl mx-auto text-lg md:text-xl leading-[1.7]" style="color:var(--color-ink)">
+          How families make more time outdoors together. Share your moment with
+          <span class="font-semibold" style="color:var(--color-charcoal)">#BrightJuly</span> and tag
+          <span class="font-semibold" style="color:var(--color-charcoal)">@BrightJuly</span>.
+        </p>
+        <div class="mt-10 flex flex-col sm:flex-row items-center justify-center gap-3">
+          <a href="#entry" class="bj-btn-amber inline-flex items-center justify-center gap-2 px-8 py-4 rounded-full text-base font-semibold tracking-wide">
+            Submit Your Entry <Icon name="lucide:arrow-right" class="w-4 h-4" />
+          </a>
+          <a href="#how" class="inline-flex items-center justify-center px-8 py-4 rounded-full text-base font-semibold tracking-wide bg-white" style="color:var(--color-charcoal);border:1px solid var(--color-line)">
+            How It Works
+          </a>
+        </div>
+        <div class="mt-10 max-w-xl mx-auto text-left">
+          <TagCallout submitText="Submit your entry through the form on this page." />
+        </div>
+      </div>
+    </section>
+
+    {/* HOW IT WORKS */}
+    <section id="how" class="py-24 md:py-32 bj-soft-grad">
+      <div class="max-w-7xl mx-auto px-6 md:px-10">
+        <div class="max-w-2xl">
+          <span class="bj-eyebrow">How It Works</span>
+          <div class="bj-rule mt-4 mb-7"></div>
+          <h2 class="text-4xl md:text-5xl leading-[1.05]">Three Steps To Enter.</h2>
+        </div>
+
+        <div class="mt-14 grid md:grid-cols-3 gap-6 md:gap-7">
+          {steps.map((s) => (
+            <article class="bj-card rounded-[22px] p-7 md:p-8 bg-white" style="border:1px solid var(--color-line)">
+              <span class="bj-step-num">{s.n}</span>
+              <h3 class="mt-6 text-xl md:text-[1.4rem]">{s.title}</h3>
+              <p class="mt-3 text-sm leading-relaxed" style="color:var(--color-muted)">{s.d}</p>
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    {/* DEADLINES */}
+    <section class="py-20 md:py-28 bj-teal-grad">
+      <div class="max-w-6xl mx-auto px-6 md:px-10">
+        <div class="text-center max-w-2xl mx-auto">
+          <Icon name="lucide:calendar-check" class="w-8 h-8 mx-auto" style="color:var(--color-teal-deep)" />
+          <span class="bj-eyebrow block mt-4">Weekly Submission Deadlines</span>
+          <h2 class="mt-5 text-3xl md:text-5xl leading-[1.08]">Submit Your Entry By 5pm AEST Every Tuesday.</h2>
+          <p class="mt-5 text-base md:text-lg leading-[1.7]" style="color:var(--color-ink)">
+            Four Tuesdays. Four chances to win. Each card below is a submission deadline, get your weekly entry in before the clock hits 5pm AEST.
+          </p>
+        </div>
+
+        <div class="mt-12 grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4">
+          {DEADLINES.map((d) => (
+            <div class="bj-card relative rounded-[22px] p-6 bg-white text-center" style="border:1px solid var(--color-line)">
+              <div class="text-[11px] tracking-[0.18em] uppercase font-semibold" style="color:var(--color-amber-deep)">{d.label}</div>
+              <div class="mt-4 flex items-baseline justify-center gap-1.5">
+                <span class="serif text-5xl md:text-6xl leading-none" style="color:var(--color-charcoal)">{d.day}</span>
+                <span class="serif text-lg md:text-xl" style="color:var(--color-teal-deep)">{d.month}</span>
+              </div>
+              <div class="mt-3 text-[11px] tracking-[0.14em] uppercase" style="color:var(--color-muted)">{d.weekday} · Entries close 5pm</div>
+            </div>
+          ))}
+        </div>
+
+        <div class="mt-10 max-w-2xl mx-auto rounded-2xl bg-white p-5 md:p-6" style="border:1px solid var(--color-line)">
+          <div class="text-[11px] tracking-[0.18em] uppercase font-semibold text-center" style="color:var(--color-teal-deep)">Winner Announcements</div>
+          <ul class="mt-4 grid sm:grid-cols-2 gap-x-6 gap-y-2 text-sm md:text-base" style="color:var(--color-ink)">
+            {WINNERS.map((w) => (
+              <li class="flex items-center gap-2">
+                <span class="w-1.5 h-1.5 rounded-full" style="background:var(--color-amber-deep)"></span>
+                {w}
+              </li>
+            ))}
+          </ul>
+        </div>
+
+        <p class="mt-8 text-center text-sm" style="color:var(--color-muted)">
+          All times are AEST. Late entries roll into the following week.
+        </p>
+      </div>
+    </section>
+
+    {/* THE PRIZE */}
+    <section class="py-20 md:py-28" style="background:#FFFDF8;border-top:1px solid var(--color-line)">
+      <div class="max-w-5xl mx-auto px-6 md:px-10 text-center">
+        <Icon name="lucide:gift" class="w-8 h-8 mx-auto" style="color:var(--color-amber-deep)" />
+        <span class="bj-eyebrow block mt-4">What You Can Win</span>
+        <h2 class="mt-5 text-3xl md:text-5xl leading-[1.08]">Two pairs of premium sunglasses, every week.</h2>
+        <p class="mt-5 max-w-2xl mx-auto text-base md:text-lg leading-[1.7]" style="color:var(--color-muted)">
+          Awarded to the most creative family outdoor moments. Submit a new entry each week for
+          another chance to win.
+        </p>
+        {/* TODO: replace placehold.co URLs with the supplied sunglasses prize images
+            (move files into src/assets and switch to <Image>). */}
+        <div class="mt-10 grid grid-cols-2 gap-4 md:gap-5 max-w-2xl mx-auto">
+          <img src="https://placehold.co/800x600/FBE6C8/B86F22?text=Sunglasses+Prize" alt="Premium sunglasses prize" loading="lazy" width="800" height="600" class="w-full h-auto rounded-[22px]" style="border:1px solid var(--color-line)" />
+          <img src="https://placehold.co/800x600/E4F1EF/2C5C58?text=Sunglasses+Prize" alt="Premium sunglasses prize" loading="lazy" width="800" height="600" class="w-full h-auto rounded-[22px]" style="border:1px solid var(--color-line)" />
+        </div>
+      </div>
+    </section>
+
+    {/* ENTRY FORM */}
+    <section id="entry" class="py-24 md:py-32" style="background:#FFFDF8">
+      <div class="max-w-3xl mx-auto px-6 md:px-10">
+        <div class="text-center mb-12">
+          <Icon name="lucide:sparkles" class="w-7 h-7 mx-auto" style="color:var(--color-amber-deep)" />
+          <span class="bj-eyebrow block mt-4">Your Entry</span>
+          <h2 class="mt-5 text-4xl md:text-5xl leading-[1.05]">Submit Your Weekly Moment.</h2>
+          <p class="mt-5 text-base md:text-lg" style="color:var(--color-muted)">One short form. Your family's outdoor story.</p>
+        </div>
+
+        <div id="entry-error" role="alert" class="hidden mb-6 rounded-2xl px-5 py-4 text-sm" style="background:#FCEBEA;border:1px solid #E9B7B2;color:#8A2B22"></div>
+
+        <form id="entry-form" action="/api/entry" method="POST" enctype="multipart/form-data" class="rounded-[24px] bg-white p-6 md:p-10 space-y-8" style="border:1px solid var(--color-line)">
+          <fieldset class="space-y-5">
+            <legend class="serif text-2xl mb-2" style="color:var(--color-charcoal)">Family Squad Details</legend>
+            <div>
+              <label class="bj-label" for="parent">Parent / Guardian Name *</label>
+              <input id="parent" name="parent" type="text" required class="bj-input mt-2" />
+            </div>
+            <div>
+              <label class="bj-label" for="email">Email Address *</label>
+              <input id="email" name="email" type="email" required class="bj-input mt-2" />
+            </div>
+            <div>
+              <label class="bj-label" for="squad">Family Squad Name *</label>
+              <input id="squad" name="squad" type="text" required placeholder="The Outdoor Explorers" class="bj-input mt-2" />
+            </div>
+            <div>
+              <label class="bj-label" for="participants">Number of Participants *</label>
+              <input id="participants" name="participants" type="number" min="1" required placeholder="4" class="bj-input mt-2" />
+            </div>
+            <div>
+              <label class="bj-label" for="postcode">Postcode *</label>
+              <input id="postcode" name="postcode" type="text" inputmode="numeric" pattern="[0-9]{4}" maxlength="4" required placeholder="2000" class="bj-input mt-2" />
+              <p class="bj-help">So we can show participating optometrists near you.</p>
+            </div>
+            <div>
+              <label class="bj-label" for="pledge">Your Bright July Pledge</label>
+              <textarea id="pledge" name="pledge" rows="4" placeholder="How many hours will your squad pledge to spend outdoors, and what do you plan to do across July to achieve those hours?" class="bj-input mt-2"></textarea>
+            </div>
+          </fieldset>
+
+          <fieldset class="space-y-5 pt-4" style="border-top:1px solid var(--color-line)">
+            <legend class="serif text-2xl mb-2 pt-6" style="color:var(--color-charcoal)">Weekly Submission Details</legend>
+            <div>
+              <label class="bj-label" for="platform">Social Media Platform *</label>
+              <select id="platform" name="platform" required class="bj-input mt-2">
+                <option value="">Select a platform</option>
+                <option>Instagram</option>
+                <option>Facebook</option>
+                <option>TikTok</option>
+                <option>LinkedIn</option>
+                <option>Other</option>
+              </select>
+            </div>
+            <div>
+              <label class="bj-label" for="url">Social Media Post URL</label>
+              <input id="url" name="url" type="url" placeholder="https://instagram.com/p/..." class="bj-input mt-2" />
+              <p class="bj-help">Optional. Link directly to your social post.</p>
+              <div class="mt-3 flex items-start gap-2.5 rounded-xl px-4 py-3 text-sm leading-relaxed" style="background:var(--color-teal-pale);color:var(--color-teal-deep);border:1px solid var(--color-line)">
+                <Icon name="lucide:hash" class="w-4 h-4 mt-0.5 flex-shrink-0" />
+                <span>
+                  <span class="font-semibold">Reminder:</span> Tag
+                  <span class="font-mono font-bold">@BrightJuly</span> and use
+                  <span class="font-mono font-bold">#BrightJuly</span> in your post to help us find and share your entry.
+                </span>
+              </div>
+            </div>
+            <div>
+              <label class="bj-label" for="photo">Upload Photo / Screenshot</label>
+              <label for="photo" class="bj-dropzone mt-2">
+                <span class="bj-dropzone-icon"><Icon name="lucide:upload-cloud" class="w-5 h-5" /></span>
+                <span class="bj-dropzone-main">Choose a photo or screenshot</span>
+                <span class="bj-dropzone-sub">JPG, PNG or WEBP · Max 50MB</span>
+                <span id="photo-name" class="bj-dropzone-file" hidden></span>
+              </label>
+              <input id="photo" name="photo" type="file" accept="image/jpeg,image/png,image/webp" class="sr-only" />
+              <p class="bj-help">Optional. Upload a photo that may be featured on the Bright July website or social channels.</p>
+            </div>
+            <div>
+              <label class="bj-label" for="story">Story / Caption *</label>
+              <textarea id="story" name="story" rows="5" required placeholder="Tell us about your outdoor adventure." class="bj-input mt-2"></textarea>
+            </div>
+          </fieldset>
+
+          <fieldset class="space-y-4 pt-4" style="border-top:1px solid var(--color-line)">
+            <legend class="serif text-2xl mb-2 pt-6" style="color:var(--color-charcoal)">Consent</legend>
+            <label class="flex items-start gap-3 text-sm" style="color:var(--color-ink)">
+              <input type="checkbox" name="consent_promo" value="yes" required class="mt-1" />
+              <span>I consent to Bright July using my submitted content for promotional purposes.</span>
+            </label>
+            <label class="flex items-start gap-3 text-sm" style="color:var(--color-ink)">
+              <input type="checkbox" name="consent_terms" value="yes" required class="mt-1" />
+              <span>
+                I accept the
+                <a href="/competition-terms" class="underline">Competition Terms &amp; Conditions</a>
+                and
+                <a href="/privacy" class="underline">Privacy Policy</a>.
+              </span>
+            </label>
+            <label class="flex items-start gap-3 text-sm" style="color:var(--color-ink)">
+              <input type="checkbox" name="consent_marketing" value="yes" class="mt-1" />
+              <span>Keep me updated with Bright July news and future campaigns by email. <span style="color:var(--color-muted)">(Optional)</span></span>
+            </label>
+          </fieldset>
+
+          {/* Spam protection, Cloudflare Turnstile. Injects a hidden
+              `cf-turnstile-response` field that the Function verifies server-side. */}
+          <div class="cf-turnstile" data-sitekey={turnstileSiteKey} data-theme="light"></div>
+
+          <button type="submit" class="bj-btn-amber w-full inline-flex items-center justify-center gap-2 px-8 py-4 rounded-full text-base font-semibold tracking-wide">
+            <Icon name="lucide:send" class="w-4 h-4" /> Submit Entry
+          </button>
+        </form>
+        <script is:inline src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
+      </div>
+    </section>
+
+    {/* TIPS & IDEAS CROSS-LINK */}
+    <section class="py-20 md:py-24" style="background:#FFFDF8;border-top:1px solid var(--color-line)">
+      <div class="max-w-6xl mx-auto px-6 md:px-10">
+        <div class="max-w-2xl mb-10">
+          <span class="bj-eyebrow">Need Inspiration?</span>
+          <div class="bj-rule mt-4 mb-6"></div>
+          <h2 class="text-3xl md:text-4xl leading-[1.1]">Looking for your next outdoor adventure?</h2>
+          <p class="mt-5 text-base md:text-lg leading-[1.7]" style="color:var(--color-muted)">
+            Explore family-friendly winter outdoor activities, rainy-day ideas and simple ways to
+            spend more time outside together.
+          </p>
+          <a href="/#ideas" class="mt-7 inline-flex items-center gap-2 px-6 py-3 rounded-full text-sm font-semibold tracking-wide" style="border:1px solid var(--color-charcoal);color:var(--color-charcoal)">
+            Explore Tips &amp; Ideas <Icon name="lucide:arrow-right" class="w-4 h-4" />
+          </a>
+        </div>
+
+        <div class="grid md:grid-cols-3 gap-6">
+          {tips.map((card) => (
+            <a href="/#ideas" class="bj-card rounded-[22px] overflow-hidden bg-white flex flex-col" style="border:1px solid var(--color-line)">
+              <div class="aspect-[4/3] overflow-hidden">
+                <Image src={card.img} alt={card.title} loading="lazy" widths={[400, 800]} sizes="(min-width: 768px) 33vw, 100vw" class="w-full h-full object-cover" />
+              </div>
+              <div class="p-5 md:p-6 flex flex-col flex-1">
+                <span class="inline-flex self-start items-center px-2.5 py-1 rounded-full text-[10px] font-semibold tracking-wider uppercase" style="background:var(--color-teal-pale);color:var(--color-teal-deep)">{card.tag}</span>
+                <h3 class="mt-3 text-lg leading-snug">{card.title}</h3>
+                <p class="mt-2 text-sm leading-relaxed" style="color:var(--color-muted)">{card.d}</p>
+              </div>
+            </a>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    {/* FAQ */}
+    <section class="py-20 md:py-28" style="background:var(--color-cream)">
+      <div class="max-w-3xl mx-auto px-6 md:px-10">
+        <div class="mb-10">
+          <span class="bj-eyebrow">Competition FAQ</span>
+          <div class="bj-rule mt-4 mb-6"></div>
+          <h2 class="text-3xl md:text-4xl">Questions, answered.</h2>
+        </div>
+        <div class="space-y-3">
+          {FAQ.map((item) => (
+            <details class="group rounded-2xl bg-white p-5 md:p-6" style="border:1px solid var(--color-line)">
+              <summary class="flex items-center justify-between cursor-pointer list-none text-base md:text-lg font-semibold" style="color:var(--color-charcoal)">
+                {item.q}
+                <Icon name="lucide:chevron-down" class="w-5 h-5 transition-transform group-open:rotate-180" style="color:var(--color-amber-deep)" />
+              </summary>
+              <p class="mt-3 text-sm md:text-base leading-relaxed" style="color:var(--color-muted)">{item.a}</p>
+            </details>
+          ))}
+        </div>
+
+        <div class="mt-10 flex flex-wrap items-center gap-x-7 gap-y-3 text-sm" style="color:var(--color-muted)">
+          <a href="/competition-terms" class="underline-offset-4 hover:underline">Competition T&amp;Cs</a>
+          <a href="/privacy" class="underline-offset-4 hover:underline">Privacy Policy</a>
+          <a href="/terms" class="underline-offset-4 hover:underline">Website Terms</a>
+        </div>
+      </div>
+    </section>
+
+    {/* Footer */}
+    <footer class="py-12" style="background:var(--color-charcoal);color:rgba(250,246,239,0.7)">
+      <div class="max-w-7xl mx-auto px-6 md:px-10 flex flex-col md:flex-row items-center justify-between gap-4 text-sm">
+        <div class="flex items-baseline gap-3">
+          <span class="serif text-lg" style="color:var(--color-cream)">Bright July</span>
+          <span class="text-xs tracking-[0.22em] uppercase">A Family Outdoor Movement</span>
+        </div>
+        <div class="flex items-center gap-6 text-xs">
+          <a href="/competition-terms" class="hover:text-white">Competition Terms</a>
+          <a href="/privacy" class="hover:text-white">Privacy</a>
+          <a href="/terms" class="hover:text-white">Website Terms</a>
+        </div>
+        <a href="https://luxihealth.com.au/" target="_blank" rel="noopener noreferrer" aria-label="Visit Luxi Health">
+          <Image src={luxiLogo} alt="Luxi Health" class="h-8 w-auto opacity-80" />
+        </a>
+      </div>
+    </footer>
+  </main>
+</Layout>
+
+<script is:inline>
+  // Surface a friendly error if the entry endpoint redirected back with ?error=…
+  // (static page, so this is read client-side).
+  (function () {
+    var messages = {
+      verification: "We couldn't verify you're human. Please complete the check and try again.",
+      fields: "Please fill in all required fields and try again.",
+      email: "That email address doesn't look right. Please check it and try again.",
+      phototype: "Please upload a JPG, PNG or WEBP image.",
+      photosize: "That photo is larger than 50MB. Please choose a smaller file.",
+      server: "Sorry, something went wrong saving your entry. Please try again.",
+      invalid: "Something went wrong with your submission. Please try again.",
+    };
+    var errEl = document.getElementById("entry-error");
+    function showError(text) {
+      if (!errEl) return;
+      errEl.textContent = text;
+      errEl.classList.remove("hidden");
+      document.getElementById("entry")?.scrollIntoView({ behavior: "smooth" });
+    }
+
+    var key = new URLSearchParams(location.search).get("error");
+    if (key) showError(messages[key] || messages.invalid);
+
+    // Reflect the chosen file name + guard the 50MB limit client-side.
+    var MAX = 50 * 1024 * 1024;
+    var input = document.getElementById("photo");
+    var dz = document.querySelector(".bj-dropzone");
+    var nameEl = document.getElementById("photo-name");
+    if (input) {
+      input.addEventListener("change", function () {
+        var f = input.files && input.files[0];
+        var reset = function () {
+          if (nameEl) { nameEl.hidden = true; nameEl.textContent = ""; }
+          if (dz) dz.classList.remove("has-file");
+        };
+        if (!f) return reset();
+        if (f.size > MAX) {
+          input.value = "";
+          reset();
+          showError(messages.photosize);
+          return;
+        }
+        if (nameEl) { nameEl.textContent = f.name; nameEl.hidden = false; }
+        if (dz) dz.classList.add("has-file");
+        if (errEl) errEl.classList.add("hidden");
+      });
+    }
+  })();
+</script>

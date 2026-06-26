@@ -1,0 +1,150 @@
+---
+// Self-hosted fonts (bundled by Vite, served from /_astro, no third-party request).
+import "@fontsource/dm-serif-display/latin-400.css";
+import "@fontsource-variable/dm-sans/wght.css";
+import "@fontsource-variable/dm-sans/wght-italic.css";
+import "../styles/global.css";
+
+export interface Props {
+  title?: string;
+  description?: string;
+  /** Path-relative canonical, e.g. "/competition". Defaults to the current URL. */
+  canonical?: string;
+  /** Social share image (absolute path under /). */
+  ogImage?: string;
+  /** Set true on pages that should not be indexed. */
+  noindex?: boolean;
+  /** Extra JSON-LD objects to embed (e.g. FAQPage). Org + WebSite are always included. */
+  schema?: Record<string, unknown>[];
+}
+
+const {
+  title = "Bright July | A Family Outdoor Light Movement",
+  description = "Bright July is a simple family outdoor light habit movement. Make a pledge, log outdoor moments, share weekly, and win prizes this July.",
+  canonical,
+  ogImage = "/og-image.jpg",
+  noindex = false,
+  schema = [],
+} = Astro.props;
+
+const canonicalURL = new URL(canonical ?? Astro.url.pathname, Astro.site);
+const ogImageURL = new URL(ogImage, Astro.site);
+const siteURL = Astro.site!.toString().replace(/\/$/, "");
+
+// Sitewide structured data.
+const baseSchema: Record<string, unknown>[] = [
+  {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    name: "Bright July",
+    url: siteURL,
+    logo: `${siteURL}/favicon.png`,
+    sameAs: [
+      "https://www.facebook.com/brightjuly",
+      "https://www.instagram.com/brightjuly",
+    ],
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    name: "Bright July",
+    url: siteURL,
+  },
+];
+const jsonLd = [...baseSchema, ...schema];
+---
+
+<!doctype html>
+<html lang="en-AU">
+  <head>
+    {/* Set a JS flag before paint so scroll-reveal can hide elements without
+        risking a flash-of-hidden-content for no-JS users. */}
+    <script is:inline>document.documentElement.classList.add("js");</script>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/png" href="/favicon.png" />
+    <link rel="icon" href="/favicon.ico" sizes="any" />
+    <meta name="generator" content={Astro.generator} />
+
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonicalURL} />
+    {
+      noindex ? (
+        <meta name="robots" content="noindex,nofollow" />
+      ) : (
+        <meta
+          name="robots"
+          content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1"
+        />
+      )
+    }
+    <meta name="theme-color" content="#FAF6EF" />
+
+    {/* Open Graph */}
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Bright July" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonicalURL} />
+    <meta property="og:image" content={ogImageURL} />
+
+    {/* Twitter */}
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImageURL} />
+
+    {/* Structured data */}
+    {
+      jsonLd.map((entry) => (
+        <script type="application/ld+json" set:html={JSON.stringify(entry)} />
+      ))
+    }
+  </head>
+  <body>
+    <slot />
+
+    <button id="bj-to-top" class="bj-to-top" aria-label="Back to top">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <path d="M12 19V5" /><path d="m5 12 7-7 7 7" />
+      </svg>
+    </button>
+
+    <script>
+      // Back-to-top: appears after scrolling, smooth-scrolls up (reduced-motion aware).
+      const topBtn = document.getElementById("bj-to-top");
+      if (topBtn) {
+        const onScroll = () => topBtn.classList.toggle("is-visible", window.scrollY > 600);
+        onScroll();
+        window.addEventListener("scroll", onScroll, { passive: true });
+        topBtn.addEventListener("click", () => {
+          const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
+          window.scrollTo({ top: 0, behavior: reduce ? "auto" : "smooth" });
+        });
+      }
+    </script>
+
+    <script>
+      // Reveal .bj-reveal elements as they scroll into view (one-shot).
+      const reveals = document.querySelectorAll(".bj-reveal");
+      const motionOK = matchMedia("(prefers-reduced-motion: no-preference)").matches;
+      if (reveals.length && motionOK && "IntersectionObserver" in window) {
+        const io = new IntersectionObserver(
+          (entries, obs) => {
+            for (const entry of entries) {
+              if (entry.isIntersecting) {
+                entry.target.classList.add("is-visible");
+                obs.unobserve(entry.target);
+              }
+            }
+          },
+          { rootMargin: "0px 0px -10% 0px", threshold: 0.12 }
+        );
+        reveals.forEach((el) => io.observe(el));
+      } else {
+        reveals.forEach((el) => el.classList.add("is-visible"));
+      }
+    </script>
+  </body>
+</html>

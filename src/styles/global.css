@@ -1,0 +1,508 @@
+@import "tailwindcss";
+
+/* ------------------------------------------------------------------ *
+ * Design tokens (Tailwind v4 @theme)
+ * Ported from the original mockup `palette` + `fontStack` objects.
+ * Each token is exposed both as a utility (bg-cream, text-charcoal, …)
+ * and as a CSS variable (var(--color-cream)) for use in custom CSS.
+ * ------------------------------------------------------------------ */
+@theme {
+  --color-cream: #faf6ef;
+  --color-cream-soft: #f4ecdd;
+  --color-amber-soft: #fbe6c8;
+  --color-amber: #d98e3f;
+  --color-amber-deep: #b86f22;
+  --color-teal-pale: #e4f1ef;
+  --color-teal: #3f7f7a;
+  --color-teal-deep: #2c5c58;
+  --color-charcoal: #1f1b16;
+  --color-ink: #3a332b;
+  --color-muted: #6e6357;
+  --color-line: rgba(31, 27, 22, 0.08);
+
+  --font-serif: "DM Serif Display", ui-serif, Georgia, serif;
+  --font-sans: "DM Sans Variable", "DM Sans", ui-sans-serif, system-ui, sans-serif;
+
+  --animate-pulse-soft: pulse-soft 2.4s ease-in-out infinite;
+}
+
+@keyframes pulse-soft {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.4; }
+}
+
+/* ------------------------------------------------------------------ *
+ * Base page
+ * ------------------------------------------------------------------ */
+.bj-page {
+  font-family: var(--font-sans);
+  color: var(--color-ink);
+  background: var(--color-cream);
+  -webkit-font-smoothing: antialiased;
+}
+html { scroll-behavior: smooth; }
+.bj-page h1, .bj-page h2, .bj-page h3, .bj-page .serif {
+  font-family: var(--font-serif);
+  font-weight: 400;
+  letter-spacing: -0.01em;
+  color: var(--color-charcoal);
+}
+.serif { font-family: var(--font-serif); }
+
+/* ------------------------------------------------------------------ *
+ * Animations
+ * ------------------------------------------------------------------ */
+.bj-hero-img { animation: bjFloat 18s ease-in-out infinite; }
+@keyframes bjFloat {
+  0%, 100% { transform: scale(1.05) translateY(0); }
+  50% { transform: scale(1.08) translateY(-1.5%); }
+}
+.bj-fadeup {
+  opacity: 0;
+  transform: translateY(16px);
+  animation: bjFadeUp 0.9s ease-out forwards;
+}
+.bj-fadeup.d1 { animation-delay: 0.1s; }
+.bj-fadeup.d2 { animation-delay: 0.25s; }
+.bj-fadeup.d3 { animation-delay: 0.4s; }
+.bj-fadeup.d4 { animation-delay: 0.55s; }
+@keyframes bjFadeUp { to { opacity: 1; transform: none; } }
+
+@media (prefers-reduced-motion: reduce) {
+  .bj-hero-img, .bj-fadeup, .bj-podcast-glow { animation: none; }
+  .bj-fadeup { opacity: 1; transform: none; }
+}
+
+/* Scroll reveal, gated behind html.js so no-JS users always see content,
+   and behind no-preference so reduced-motion users skip the movement. */
+@media (prefers-reduced-motion: no-preference) {
+  html.js .bj-reveal {
+    opacity: 0;
+    transform: translateY(22px);
+    transition: opacity 0.7s cubic-bezier(0.2, 0.6, 0.2, 1),
+      transform 0.7s cubic-bezier(0.2, 0.6, 0.2, 1);
+  }
+  html.js .bj-reveal.is-visible { opacity: 1; transform: none; }
+}
+
+/* Keyboard focus, visible ring for interactive elements. */
+:where(a, button, summary, input, select, textarea, [tabindex]):focus-visible {
+  outline: 2px solid var(--color-amber-deep);
+  outline-offset: 3px;
+}
+
+/* Anchored sections clear the fixed header when navigated to. */
+.bj-page section[id] { scroll-margin-top: 88px; }
+
+/* Back-to-top button (shown after scrolling; toggled via .is-visible by JS). */
+.bj-to-top {
+  position: fixed;
+  right: 20px;
+  bottom: 20px;
+  z-index: 60;
+  width: 46px;
+  height: 46px;
+  border-radius: 999px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--color-charcoal);
+  color: var(--color-cream);
+  box-shadow: 0 14px 30px -12px rgba(31, 27, 22, 0.55);
+  cursor: pointer;
+  opacity: 0;
+  transform: translateY(10px);
+  pointer-events: none;
+  transition: opacity 0.25s ease, transform 0.25s ease, background 0.25s ease;
+}
+.bj-to-top.is-visible { opacity: 1; transform: none; pointer-events: auto; }
+.bj-to-top:hover { background: var(--color-amber-deep); }
+
+/* Editorial drop-cap (founder note). */
+.bj-dropcap::first-letter {
+  font-family: var(--font-serif);
+  font-size: 3.4em;
+  line-height: 0.78;
+  float: left;
+  margin: 0.04em 0.1em 0 0;
+  color: var(--color-amber-deep);
+}
+
+/* FAQ accordion, smooth open/close, CSS-only (no JS).
+   Uses ::details-content + interpolate-size where supported; degrades to an
+   instant open elsewhere. */
+:root { interpolate-size: allow-keywords; }
+@media (prefers-reduced-motion: no-preference) {
+  .bj-page details.group::details-content {
+    block-size: 0;
+    opacity: 0;
+    overflow: clip;
+    transition:
+      block-size 0.32s ease,
+      opacity 0.3s ease,
+      content-visibility 0.32s allow-discrete;
+  }
+  .bj-page details.group[open]::details-content {
+    block-size: auto;
+    opacity: 1;
+  }
+}
+
+/* ------------------------------------------------------------------ *
+ * Cards, buttons, misc
+ * ------------------------------------------------------------------ */
+.bj-card { transition: transform 0.5s ease, box-shadow 0.5s ease; }
+.bj-card:hover { transform: translateY(-4px); box-shadow: 0 24px 60px -28px rgba(31, 27, 22, 0.22); }
+.bj-link-cta { transition: gap 0.3s ease, color 0.3s ease; }
+.bj-link-cta:hover { gap: 14px; }
+.bj-glass {
+  background: rgba(250, 246, 239, 0.78);
+  backdrop-filter: saturate(140%) blur(14px);
+  -webkit-backdrop-filter: saturate(140%) blur(14px);
+}
+
+/* Mobile hamburger nav, display is controlled by Tailwind utilities on the
+   button (inline-flex + lg:hidden) so the responsive `lg:hidden` isn't beaten
+   by this unlayered rule. */
+.bj-nav-burger {
+  width: 42px;
+  height: 42px;
+  border-radius: 12px;
+  color: var(--color-charcoal);
+  transition: background 0.2s ease;
+}
+.bj-nav-burger:hover { background: rgba(31, 27, 22, 0.06); }
+.bj-nav-burger .bj-burger-close { display: none; }
+.bj-nav-burger.is-open .bj-burger-open { display: none; }
+.bj-nav-burger.is-open .bj-burger-close { display: inline-flex; }
+.bj-mobnav-panel {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  background: rgba(250, 246, 239, 0.97);
+  backdrop-filter: saturate(140%) blur(14px);
+  -webkit-backdrop-filter: saturate(140%) blur(14px);
+  border-bottom: 1px solid var(--color-line);
+  box-shadow: 0 24px 44px -26px rgba(31, 27, 22, 0.35);
+  opacity: 0;
+  transform: translateY(-10px);
+  transition: opacity 0.22s ease, transform 0.22s ease;
+}
+.bj-mobnav-panel.is-open { opacity: 1; transform: translateY(0); }
+.bj-mobnav-link {
+  display: block;
+  padding: 13px 2px;
+  font-size: 1.05rem;
+  color: var(--color-ink);
+  border-bottom: 1px solid var(--color-line);
+}
+.bj-mobnav-link:active { color: var(--color-amber-deep); }
+.bj-btn-primary {
+  background: var(--color-charcoal);
+  color: var(--color-cream);
+  transition: transform 0.3s ease, background 0.3s ease;
+}
+.bj-btn-primary:hover { background: var(--color-amber-deep); transform: translateY(-1px); }
+.bj-btn-amber {
+  background: var(--color-amber);
+  color: #fff;
+  transition: background 0.3s ease, transform 0.3s ease;
+}
+.bj-btn-amber:hover { background: var(--color-amber-deep); transform: translateY(-1px); }
+.bj-eyebrow {
+  font-size: 11px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--color-teal);
+  font-weight: 600;
+}
+.bj-rule { width: 36px; height: 1px; background: var(--color-charcoal); opacity: 0.3; }
+.bj-soft-grad { background: linear-gradient(180deg, #fffdf8 0%, var(--color-cream) 100%); }
+.bj-amber-grad { background: linear-gradient(160deg, #fff6e6 0%, var(--color-amber-soft) 100%); }
+.bj-teal-grad { background: linear-gradient(160deg, #f0f7f6 0%, var(--color-teal-pale) 100%); }
+.bj-step-num { font-family: var(--font-serif); font-size: 44px; line-height: 1; color: var(--color-amber-deep); }
+.bj-mock {
+  border-radius: 28px;
+  background: #fff;
+  box-shadow: 0 30px 80px -40px rgba(31, 27, 22, 0.35), 0 4px 14px -8px rgba(31, 27, 22, 0.1);
+  border: 1px solid var(--color-line);
+}
+.bj-dot { width: 8px; height: 8px; border-radius: 9999px; display: inline-block; }
+.bj-tile { aspect-ratio: 1 / 1; border-radius: 18px; overflow: hidden; position: relative; border: 1px solid var(--color-line); }
+.bj-progress { height: 8px; background: var(--color-cream-soft); border-radius: 9999px; overflow: hidden; }
+.bj-progress > span { display: block; height: 100%; background: linear-gradient(90deg, var(--color-amber), var(--color-amber-deep)); border-radius: 9999px; }
+
+/* Form controls (competition entry form) */
+.bj-input {
+  width: 100%;
+  background: #fff;
+  border: 1px solid var(--color-line);
+  border-radius: 12px;
+  padding: 12px 14px;
+  font-size: 15px;
+  color: var(--color-charcoal);
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  font-family: inherit;
+}
+.bj-input:focus { outline: none; border-color: var(--color-amber); box-shadow: 0 0 0 3px rgba(217, 142, 63, 0.18); }
+.bj-label { font-size: 13px; font-weight: 600; color: var(--color-charcoal); letter-spacing: 0.02em; }
+.bj-help { font-size: 12px; color: var(--color-muted); margin-top: 4px; }
+
+/* File upload dropzone */
+.bj-dropzone {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  text-align: center;
+  cursor: pointer;
+  border-radius: 16px;
+  background: #fff;
+  border: 1.5px dashed rgba(31, 27, 22, 0.18);
+  padding: 26px 20px;
+  transition: border-color 0.2s ease, background 0.2s ease;
+}
+.bj-dropzone:hover,
+.bj-dropzone:focus-within { border-color: var(--color-amber); background: #fffdf8; }
+.bj-dropzone-icon {
+  width: 44px;
+  height: 44px;
+  border-radius: 999px;
+  display: grid;
+  place-items: center;
+  background: var(--color-amber-soft);
+  color: var(--color-amber-deep);
+  margin-bottom: 4px;
+  transition: background 0.2s ease, color 0.2s ease;
+}
+.bj-dropzone-main { font-weight: 600; color: var(--color-charcoal); font-size: 14px; }
+.bj-dropzone-sub { font-size: 12px; color: var(--color-muted); letter-spacing: 0.01em; }
+.bj-dropzone-file { font-size: 13px; color: var(--color-teal-deep); font-weight: 600; margin-top: 8px; word-break: break-all; }
+.bj-dropzone.has-file { border-style: solid; border-color: var(--color-teal); background: #f2f8f7; }
+.bj-dropzone.has-file .bj-dropzone-icon { background: var(--color-teal-pale); color: var(--color-teal-deep); }
+
+/* ------------------------------------------------------------------ *
+ * Tag pills + "Post. Tag. Enter." callout
+ * ------------------------------------------------------------------ */
+.bj-tag-pill {
+  display: inline-flex;
+  align-items: center;
+  padding: 3px 12px;
+  border-radius: 999px;
+  background: var(--color-amber-soft);
+  color: #7a4b17;
+  font-weight: 700;
+  font-family: "JetBrains Mono", ui-monospace, SFMono-Regular, monospace;
+  font-size: 0.9em;
+  letter-spacing: 0.01em;
+}
+.bj-tag-pill.teal { background: var(--color-teal-pale); color: var(--color-teal-deep); }
+.bj-tag-callout {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  padding: 22px 24px;
+  border-radius: 22px;
+  background: #ffffff;
+  border: 1px solid var(--color-line);
+  box-shadow: 0 18px 50px -30px rgba(31, 27, 22, 0.28);
+  max-width: 600px;
+}
+.bj-tag-callout.dark {
+  background: rgba(20, 16, 12, 0.55);
+  backdrop-filter: blur(10px);
+  border-color: rgba(255, 255, 255, 0.18);
+  color: #fff;
+}
+.bj-tag-callout .bj-tc-title {
+  font-family: var(--font-serif);
+  font-size: 1.3rem;
+  line-height: 1.1;
+  color: var(--color-charcoal);
+  margin: 0;
+  letter-spacing: -0.01em;
+}
+.bj-tag-callout.dark .bj-tc-title { color: #fff; }
+.bj-tag-callout ol { margin: 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: 8px; }
+.bj-tag-callout li {
+  font-size: 14.5px;
+  color: var(--color-ink);
+  display: flex;
+  gap: 10px;
+  align-items: flex-start;
+  line-height: 1.45;
+  flex-wrap: nowrap;
+}
+.bj-tag-callout li > span:last-child { flex: 1; min-width: 0; }
+.bj-tag-callout li .num { margin-top: 2px; }
+.bj-tag-callout.dark li { color: rgba(255, 255, 255, 0.95); }
+.bj-tag-callout li .num {
+  width: 22px;
+  height: 22px;
+  border-radius: 999px;
+  background: var(--color-cream-soft);
+  color: var(--color-amber-deep);
+  font-weight: 800;
+  font-size: 11px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  font-family: var(--font-sans);
+}
+.bj-tag-callout.dark li .num { background: rgba(255, 255, 255, 0.18); color: #fff; }
+
+/* ------------------------------------------------------------------ *
+ * Podcast section
+ * ------------------------------------------------------------------ */
+.bj-podcast {
+  position: relative;
+  overflow: hidden;
+  padding: 96px 24px;
+  background: radial-gradient(circle at top left, rgba(217, 142, 63, 0.2), transparent 34%),
+    linear-gradient(135deg, #fff6e6 0%, #f0f7f6 52%, var(--color-cream) 100%);
+  color: var(--color-ink);
+  font-family: var(--font-sans);
+}
+.bj-podcast-glow {
+  position: absolute;
+  right: -120px;
+  top: 80px;
+  width: 320px;
+  height: 320px;
+  background: rgba(217, 142, 63, 0.26);
+  border-radius: 999px;
+  filter: blur(20px);
+  animation: bjSoftPulse 5s ease-in-out infinite;
+}
+.bj-podcast-container {
+  position: relative;
+  max-width: 1180px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 0.9fr 1.4fr;
+  gap: 56px;
+  align-items: center;
+}
+.bj-podcast-eyebrow {
+  display: inline-flex;
+  padding: 9px 14px;
+  border-radius: 999px;
+  background: var(--color-teal-pale);
+  color: var(--color-teal-deep);
+  font-weight: 700;
+  font-size: 0.82rem;
+  margin-bottom: 20px;
+  letter-spacing: 0.04em;
+}
+.bj-podcast-intro h2 {
+  font-family: var(--font-serif);
+  font-weight: 400;
+  font-size: clamp(2.2rem, 5vw, 4.3rem);
+  line-height: 1;
+  margin: 0 0 22px;
+  letter-spacing: -0.01em;
+  color: var(--color-charcoal);
+}
+.bj-podcast-intro p {
+  font-size: 1.08rem;
+  line-height: 1.7;
+  color: var(--color-muted);
+  max-width: 500px;
+  margin-bottom: 32px;
+}
+.bj-podcast-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 16px 24px;
+  border-radius: 999px;
+  background: linear-gradient(135deg, var(--color-teal), var(--color-teal-deep));
+  color: white;
+  text-decoration: none;
+  font-weight: 800;
+  box-shadow: 0 14px 30px rgba(63, 127, 122, 0.28);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+.bj-podcast-cta:hover { transform: translateY(-3px); box-shadow: 0 18px 38px rgba(63, 127, 122, 0.34); }
+.bj-episode-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 22px; }
+.bj-episode-card {
+  background: rgba(255, 255, 255, 0.88);
+  border: 1px solid var(--color-line);
+  border-radius: 28px;
+  overflow: hidden;
+  box-shadow: 0 18px 45px rgba(31, 27, 22, 0.08);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+.bj-episode-card:hover { transform: translateY(-5px); box-shadow: 0 24px 55px rgba(31, 27, 22, 0.14); }
+.bj-episode-card.featured { background: #fff; }
+.bj-video-placeholder {
+  min-height: 190px;
+  background: linear-gradient(135deg, rgba(217, 142, 63, 0.85), rgba(63, 127, 122, 0.82)),
+    url("https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=1200&q=80");
+  background-size: cover;
+  background-position: center;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  padding: 18px;
+  color: white;
+}
+.bj-video-placeholder span.ep-num {
+  padding: 8px 12px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.22);
+  backdrop-filter: blur(8px);
+  font-weight: 800;
+  font-size: 0.8rem;
+}
+.bj-play-button {
+  width: 52px;
+  height: 52px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.94);
+  color: var(--color-teal);
+  display: grid;
+  place-items: center;
+  box-shadow: 0 10px 24px rgba(31, 27, 22, 0.18);
+}
+/* YouTube facade (click-to-load embed) */
+a.bj-yt-facade { text-decoration: none; cursor: pointer; }
+a.bj-yt-facade .bj-play-button { transition: transform 0.25s ease; }
+a.bj-yt-facade:hover .bj-play-button { transform: scale(1.08); }
+/* "Premieres …" pill on unreleased episodes */
+.bj-video-placeholder .bj-soon-pill {
+  position: absolute;
+  left: 18px;
+  bottom: 18px;
+  padding: 6px 12px;
+  border-radius: 999px;
+  background: rgba(20, 16, 12, 0.55);
+  backdrop-filter: blur(8px);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  color: #fff;
+}
+.bj-video-placeholder { position: relative; }
+.bj-episode-content { padding: 22px; }
+.bj-drop-date { color: var(--color-amber-deep); font-size: 0.82rem; font-weight: 800; margin: 0 0 8px; letter-spacing: 0.04em; }
+.bj-episode-content h3 {
+  font-family: var(--font-serif);
+  font-weight: 400;
+  font-size: 1.35rem;
+  margin: 0 0 8px;
+  letter-spacing: -0.01em;
+  color: var(--color-charcoal);
+}
+.bj-episode-content p.ep-desc { color: var(--color-muted); line-height: 1.55; margin: 0; }
+@keyframes bjSoftPulse {
+  0%, 100% { transform: scale(1); opacity: 0.65; }
+  50% { transform: scale(1.08); opacity: 0.9; }
+}
+@media (max-width: 900px) {
+  .bj-podcast-container { grid-template-columns: 1fr; }
+  .bj-episode-grid { grid-template-columns: 1fr; }
+}

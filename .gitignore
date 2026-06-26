@@ -1,0 +1,22 @@
+# build output
+dist/
+# generated types
+.astro/
+# dependencies
+node_modules/
+# logs
+npm-debug.log*
+bun-debug.log*
+# environment
+.env
+.env.*
+!.env.example
+.dev.vars
+# macOS
+.DS_Store
+# editors
+.vscode/
+.idea/
+# cloudflare
+.wrangler/
+.vercel

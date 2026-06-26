@@ -1,0 +1,20 @@
+---
+// "Post. Tag. Enter." instruction callout, reused across several sections.
+export interface Props {
+  variant?: "light" | "dark";
+  /** Wording for step 4, differs between the homepage and the competition page. */
+  submitText?: string;
+}
+const { variant = "light", submitText = "Submit your entry through the competition form." } =
+  Astro.props;
+---
+
+<div class:list={["bj-tag-callout", { dark: variant === "dark" }]}>
+  <p class="bj-tc-title">Post. Tag. Enter.</p>
+  <ol>
+    <li><span class="num">1</span><span>Share your outdoor moment on Instagram or Facebook.</span></li>
+    <li><span class="num">2</span><span>Tag <span class="bj-tag-pill teal">@BrightJuly</span></span></li>
+    <li><span class="num">3</span><span>Include <span class="bj-tag-pill">#BrightJuly</span></span></li>
+    <li><span class="num">4</span><span>{submitText}</span></li>
+  </ol>
+</div>

@@ -1,0 +1,107 @@
+---
+import { Image } from "astro:assets";
+import { Icon } from "astro-icon/components";
+import Layout from "../../layouts/Layout.astro";
+import { ideaPuddle, ideaClouds, social3 as ideaLoop } from "../../data/images.ts";
+
+const tips = [
+  { tag: "Rain-Friendly", title: "🌧️ Puddle Walk Adventure", d: "Pull on your gumboots and head out to find the biggest puddle and the best splash.", img: ideaPuddle },
+  { tag: "Nature Discovery", title: "☁️ Rainy Day Explorer Challenge", d: "Listen for raindrops, search for cloud shapes and keep a small outdoor journal.", img: ideaClouds },
+  { tag: "After School", title: "After-school light loop", d: "Take the long way home for fifteen minutes of daylight before screens take over.", img: ideaLoop },
+];
+---
+
+<Layout
+  title="Entry received | Bright July"
+  description="Thanks for entering the Bright July Outdoor Light Challenge."
+  canonical="/competition/success"
+  noindex
+>
+  <div class="bj-page">
+    {/* Header */}
+    <header class="border-b" style="border-color:var(--color-line);background:rgba(250,246,239,0.92);backdrop-filter:blur(10px)">
+      <div class="max-w-7xl mx-auto px-6 md:px-10 h-16 flex items-center justify-between">
+        <a href="/" class="flex items-center gap-2 text-sm tracking-wide" style="color:var(--color-charcoal)">
+          <Icon name="lucide:sun" class="w-4 h-4" style="color:var(--color-amber-deep)" />
+          <span class="serif text-lg">Bright July</span>
+        </a>
+        <a href="/" class="inline-flex items-center gap-2 text-xs tracking-widest uppercase" style="color:var(--color-muted)">
+          <Icon name="lucide:arrow-left" class="w-3.5 h-3.5" /> Back Home
+        </a>
+      </div>
+    </header>
+
+    {/* Success */}
+    <section class="py-20 md:py-28 bj-amber-grad">
+      <div class="max-w-3xl mx-auto px-6 md:px-10 text-center">
+        <Icon name="lucide:check-circle-2" class="w-14 h-14 mx-auto" style="color:var(--color-teal)" />
+        <h1 class="mt-6 text-4xl md:text-6xl leading-[1.05]">Thanks for joining Bright July!</h1>
+        <p class="mt-5 text-lg md:text-xl" style="color:var(--color-ink)">Your entry has been received.</p>
+        <p class="mt-2 text-base" style="color:var(--color-muted)">
+          Keep getting outdoors and come back next week with another outdoor moment.
+        </p>
+      </div>
+    </section>
+
+    {/* Tips & Ideas */}
+    <section class="py-20 md:py-24" style="background:#FFFDF8">
+      <div class="max-w-6xl mx-auto px-6 md:px-10">
+        <div class="max-w-2xl mb-10">
+          <span class="bj-eyebrow">Need Inspiration?</span>
+          <div class="bj-rule mt-4 mb-6"></div>
+          <h2 class="text-3xl md:text-4xl leading-[1.1]">Looking for your next outdoor adventure?</h2>
+          <p class="mt-5 text-base md:text-lg leading-[1.7]" style="color:var(--color-muted)">
+            Explore our Bright July Tips &amp; Ideas, family-friendly winter activities, rainy-day
+            ideas and simple ways to spend more time outside together.
+          </p>
+          <a href="/#ideas" class="mt-7 inline-flex items-center gap-2 px-6 py-3 rounded-full text-sm font-semibold tracking-wide" style="border:1px solid var(--color-charcoal);color:var(--color-charcoal)">
+            Explore Bright July Tips &amp; Ideas <Icon name="lucide:arrow-right" class="w-4 h-4" />
+          </a>
+        </div>
+
+        <div class="grid md:grid-cols-3 gap-6">
+          {tips.map((card) => (
+            <a href="/#ideas" class="bj-card rounded-[22px] overflow-hidden bg-white flex flex-col" style="border:1px solid var(--color-line)">
+              <div class="aspect-[4/3] overflow-hidden">
+                <Image src={card.img} alt={card.title} loading="lazy" widths={[400, 800]} sizes="(min-width: 768px) 33vw, 100vw" class="w-full h-full object-cover" />
+              </div>
+              <div class="p-5 md:p-6 flex flex-col flex-1">
+                <span class="inline-flex self-start items-center px-2.5 py-1 rounded-full text-[10px] font-semibold tracking-wider uppercase" style="background:var(--color-teal-pale);color:var(--color-teal-deep)">{card.tag}</span>
+                <h3 class="mt-3 text-lg leading-snug">{card.title}</h3>
+                <p class="mt-2 text-sm leading-relaxed" style="color:var(--color-muted)">{card.d}</p>
+              </div>
+            </a>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    {/* Find a Local Optometrist, placeholder until John's list + matching rule land */}
+    <section class="py-20 md:py-24 bj-teal-grad">
+      <div class="max-w-3xl mx-auto px-6 md:px-10 text-center">
+        <Icon name="lucide:map-pin" class="w-7 h-7 mx-auto" style="color:var(--color-teal-deep)" />
+        <span class="bj-eyebrow block mt-4">Find a Local Optometrist</span>
+        <h2 class="mt-5 text-3xl md:text-4xl leading-[1.08]">Eye-care partners near you.</h2>
+        <p class="mt-5 text-base md:text-lg leading-[1.7]" style="color:var(--color-muted)">
+          Based on your postcode, we'll soon list participating optometrists close to you.
+          <em>Coming shortly.</em>
+        </p>
+      </div>
+    </section>
+
+    {/* Footer */}
+    <footer class="py-12" style="background:var(--color-charcoal);color:rgba(250,246,239,0.7)">
+      <div class="max-w-7xl mx-auto px-6 md:px-10 flex flex-col md:flex-row items-center justify-between gap-4 text-sm">
+        <div class="flex items-baseline gap-3">
+          <span class="serif text-lg" style="color:var(--color-cream)">Bright July</span>
+          <span class="text-xs tracking-[0.22em] uppercase">A Family Outdoor Movement</span>
+        </div>
+        <div class="flex items-center gap-6 text-xs">
+          <a href="/competition-terms" class="hover:text-white">Competition Terms</a>
+          <a href="/privacy" class="hover:text-white">Privacy Policy</a>
+          <a href="/terms" class="hover:text-white">Website Terms</a>
+        </div>
+      </div>
+    </footer>
+  </div>
+</Layout>

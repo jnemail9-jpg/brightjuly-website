@@ -1,0 +1,25 @@
+---
+import { Icon } from "astro-icon/components";
+import Layout from "../layouts/Layout.astro";
+---
+
+<Layout title="Page not found | Bright July" canonical="/404" noindex>
+  <main class="bj-page" style="min-height:80vh;display:grid;place-items:center">
+    <div class="max-w-xl mx-auto px-6 text-center py-24">
+      <Icon name="lucide:sun" class="w-8 h-8 mx-auto" style="color:var(--color-amber-deep)" />
+      <p class="bj-eyebrow mt-6">Error 404</p>
+      <h1 class="mt-4 text-5xl md:text-6xl leading-[1.04]">This page wandered off outside.</h1>
+      <p class="mt-6 text-base md:text-lg leading-relaxed" style="color:var(--color-muted)">
+        The page you're looking for can't be found, but there's plenty of brightness back home.
+      </p>
+      <div class="mt-10 flex flex-col sm:flex-row items-center justify-center gap-3">
+        <a href="/" class="bj-btn-amber inline-flex items-center justify-center px-8 py-4 rounded-full text-sm font-semibold tracking-wide">
+          Back to Homepage
+        </a>
+        <a href="/competition" class="inline-flex items-center justify-center px-8 py-4 rounded-full text-sm font-semibold tracking-wide bg-white" style="color:var(--color-charcoal);border:1px solid var(--color-line)">
+          Enter The Challenge
+        </a>
+      </div>
+    </div>
+  </main>
+</Layout>

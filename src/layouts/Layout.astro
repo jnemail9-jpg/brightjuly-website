@@ -81,6 +81,18 @@ const jsonLd = [...baseSchema, ...schema];
     }
     <meta name="theme-color" content="#FAF6EF" />
 
+    {/* Privacy-friendly analytics by Plausible */}
+    <script is:inline async src="https://plausible.io/js/pa-nG2KON_wRZsYB43orJecp.js"></script>
+    <script is:inline>
+      window.plausible =
+        window.plausible ||
+        function () {
+          (plausible.q = plausible.q || []).push(arguments);
+        };
+      plausible.init = plausible.init || function (i) { plausible.o = i || {}; };
+      plausible.init();
+    </script>
+
     {/* Open Graph */}
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content="Bright July" />
@@ -110,6 +122,27 @@ const jsonLd = [...baseSchema, ...schema];
         <path d="M12 19V5" /><path d="m5 12 7-7 7 7" />
       </svg>
     </button>
+
+    <script is:inline>
+      // Manual analytics tagging: clicking any element with [data-analytics] fires a
+      // Plausible event. The event name is the data-analytics value; any other
+      // data-analytics-* attributes become custom props (e.g. data-analytics-cta).
+      document.addEventListener("click", function (e) {
+        var el = e.target.closest("[data-analytics]");
+        if (!el || typeof window.plausible !== "function") return;
+        var props = {};
+        for (var i = 0; i < el.attributes.length; i++) {
+          var a = el.attributes[i];
+          if (a.name.indexOf("data-analytics-") === 0) props[a.name.slice(15)] = a.value;
+        }
+        // Auto-capture the element's text as `label` unless one was set explicitly.
+        if (!props.label) {
+          var t = (el.textContent || "").trim().replace(/\s+/g, " ");
+          if (t) props.label = t.slice(0, 60);
+        }
+        window.plausible(el.getAttribute("data-analytics"), { props: props });
+      });
+    </script>
 
     <script>
       // Back-to-top: appears after scrolling, smooth-scrolls up (reduced-motion aware).

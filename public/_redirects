@@ -1,4 +1,0 @@
-# Redirect the www subdomain to the apex (canonical) host, preserving the path.
-# Requires www.brightjuly.com.au to be added as a custom domain on the Pages project
-# (otherwise traffic to www never reaches Pages and this rule can't run).
-https://www.brightjuly.com.au/* https://brightjuly.com.au/:splat 301!

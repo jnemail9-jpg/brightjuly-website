@@ -104,4 +104,9 @@ const tips = [
       </div>
     </footer>
   </div>
+
+  {/* Conversion: this page is only reached after a successful entry. */}
+  <script is:inline>
+    if (typeof window.plausible === "function") window.plausible("Competition Entry");
+  </script>
 </Layout>

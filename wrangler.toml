@@ -3,29 +3,30 @@ name = "brightjuly-website"
 compatibility_date = "2026-06-25"
 pages_build_output_dir = "dist"
 
-# R2 (photo uploads) is added in a later increment. Secrets (TURNSTILE_SECRET_KEY,
-# BREVO_API_KEY) go in .dev.vars locally and the Pages dashboard in production.
+# ── Backend bindings (D1 + R2) ──────────────────────────────────────────────
+# Commented out so Cloudflare Pages can deploy NOW: Pages fails the deployment if
+# a binding points at a D1 database / R2 bucket that doesn't exist yet.
+#
+# To enable the competition backend (entries + photo uploads), one-time:
+#   1.  wrangler d1 create brightjuly-entries          # copy the printed database_id
+#   2.  wrangler r2 bucket create brightjuly-photos --location=apac
+#   3.  paste the real database_id below, then uncomment BOTH blocks
+#   4.  wrangler d1 migrations apply brightjuly-entries --remote
+#   5.  redeploy
+# This also restores local backend testing via `wrangler pages dev`.
+#
+# [[d1_databases]]
+# binding = "DB"
+# database_name = "brightjuly-entries"
+# database_id = "PASTE-REAL-DATABASE-ID-HERE"
+# migrations_dir = "migrations"
+#
+# [[r2_buckets]]
+# binding = "PHOTOS"
+# bucket_name = "brightjuly-photos"
 
-# Competition entries database.
-# database_id is a placeholder for local dev — replace with the real id from
-# `wrangler d1 create brightjuly-entries` before deploying.
-[[d1_databases]]
-binding = "DB"
-database_name = "brightjuly-entries"
-database_id = "00000000-0000-0000-0000-000000000000"
-migrations_dir = "migrations"
-
-# Entry photo/screenshot uploads.
-# Create with: wrangler r2 bucket create brightjuly-photos --location=apac
-[[r2_buckets]]
-binding = "PHOTOS"
-bucket_name = "brightjuly-photos"
-
-# Non-secret Brevo config (sender + marketing list). Override per-env as needed.
+# Non-secret Brevo config. The sender (Bright July <noreply@brightjuly.com.au>) is
+# hardcoded in functions/api/entry.ts. BREVO_API_KEY is a dashboard secret.
 [vars]
-BREVO_SENDER_NAME = "Bright July"
-BREVO_SENDER_EMAIL = "hello@brightjuly.com.au"
 BREVO_MARKETING_LIST_ID = ""
-# Brevo transactional template id (responsive, editable in Brevo). Leave empty to
-# use the inline HTML fallback. Template should use {{ params.firstName }} + {{ params.squad }}.
 BREVO_TEMPLATE_ID = ""

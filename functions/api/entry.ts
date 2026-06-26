@@ -11,8 +11,6 @@ interface Env {
   PHOTOS: R2Bucket;
   TURNSTILE_SECRET_KEY?: string;
   BREVO_API_KEY?: string;
-  BREVO_SENDER_EMAIL?: string;
-  BREVO_SENDER_NAME?: string;
   BREVO_MARKETING_LIST_ID?: string;
   BREVO_TEMPLATE_ID?: string;
 }
@@ -120,10 +118,7 @@ async function sendConfirmationEmail(env: Env, e: Entry): Promise<void> {
   const payload = Number.isFinite(templateId)
     ? { to, templateId, params: { firstName, squad: e.squad_name } }
     : {
-        sender: {
-          name: env.BREVO_SENDER_NAME ?? "Bright July",
-          email: env.BREVO_SENDER_EMAIL ?? "hello@brightjuly.com.au",
-        },
+        sender: { name: "Bright July", email: "noreply@brightjuly.com.au" },
         to,
         subject: "Your Bright July entry is in 🌞",
         htmlContent: `<!doctype html><html><body style="margin:0;background:#FAF6EF;font-family:Arial,Helvetica,sans-serif;color:#3A332B">

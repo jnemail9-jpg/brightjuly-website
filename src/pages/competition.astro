@@ -434,16 +434,71 @@ const faqSchema = {
       });
     }
 
-    // Loading state: the `submit` event fires only after native validation passes,
-    // so this just covers the real submission. Prevents double-submits.
+    // Inline field validation (progressive enhancement). Without JS, the form's
+    // native HTML5 validation + server-side checks still apply.
     var form = document.getElementById("entry-form");
     var submitBtn = form && form.querySelector('button[type="submit"]');
     if (form && submitBtn) {
-      form.addEventListener("submit", function () {
+      form.noValidate = true; // suppress native bubbles; we render styled inline errors
+
+      var fields = Array.prototype.slice
+        .call(form.querySelectorAll("input, select, textarea"))
+        .filter(function (f) { return f.type !== "file" && f.type !== "hidden"; });
+
+      function anchorFor(f) { return f.type === "checkbox" ? f.closest("label") || f : f; }
+      function messageFor(f) {
+        var v = f.validity;
+        if (v.valueMissing)
+          return f.type === "checkbox" ? "Please tick this box to continue." : "This field is required.";
+        if (v.typeMismatch && f.type === "email") return "Please enter a valid email address.";
+        if (v.typeMismatch && f.type === "url") return "Please enter a valid link (including https://).";
+        if (v.patternMismatch && f.id === "postcode") return "Postcode must be 4 digits.";
+        if (v.rangeUnderflow) return "Please enter 1 or more.";
+        if (v.badInput) return "Please enter a valid value.";
+        return f.validationMessage || "Please check this field.";
+      }
+      function clearField(f) {
+        if (f._bjErr) { f._bjErr.remove(); f._bjErr = null; }
+        f.classList.remove("is-invalid");
+      }
+      function validateField(f) {
+        if (f.checkValidity()) { clearField(f); return true; }
+        if (!f._bjErr) {
+          var p = document.createElement("p");
+          p.className = "bj-field-error";
+          anchorFor(f).insertAdjacentElement("afterend", p);
+          f._bjErr = p;
+        }
+        f._bjErr.textContent = messageFor(f);
+        f.classList.add("is-invalid");
+        return false;
+      }
+
+      fields.forEach(function (f) {
+        f.addEventListener("blur", function () { validateField(f); });
+        f.addEventListener("input", function () { if (f._bjErr) validateField(f); });
+        f.addEventListener("change", function () {
+          if (f.type === "checkbox" || f.tagName === "SELECT") validateField(f);
+        });
+      });
+
+      form.addEventListener("submit", function (e) {
+        var firstInvalid = null;
+        fields.forEach(function (f) {
+          if (!validateField(f) && !firstInvalid) firstInvalid = f;
+        });
+        if (firstInvalid) {
+          e.preventDefault();
+          firstInvalid.focus({ preventScroll: true });
+          anchorFor(firstInvalid).scrollIntoView({ block: "center", behavior: "smooth" });
+          return;
+        }
+        // Valid → loading state (prevents double-submit).
         submitBtn.disabled = true;
         submitBtn.classList.add("is-loading");
       });
-      // Reset if the page is restored from the back/forward cache.
+
+      // Reset loading if restored from the back/forward cache.
       window.addEventListener("pageshow", function (e) {
         if (e.persisted) {
           submitBtn.disabled = false;

@@ -249,6 +249,11 @@ html { scroll-behavior: smooth; }
 .bj-label { font-size: 13px; font-weight: 600; color: var(--color-charcoal); letter-spacing: 0.02em; }
 .bj-help { font-size: 12px; color: var(--color-muted); margin-top: 4px; }
 
+/* Inline validation */
+.bj-input.is-invalid { border-color: #d14343; box-shadow: 0 0 0 3px rgba(209, 67, 67, 0.16); }
+.is-invalid:not(.bj-input) { outline: 2px solid #d14343; outline-offset: 2px; }
+.bj-field-error { color: #b42318; font-size: 12px; font-weight: 500; margin-top: 6px; }
+
 /* Submit button loading state */
 .bj-btn-loading { display: none; }
 button.is-loading .bj-btn-content { display: none; }

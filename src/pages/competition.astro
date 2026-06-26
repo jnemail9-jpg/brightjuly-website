@@ -298,7 +298,8 @@ const faqSchema = {
           <div class="cf-turnstile" data-sitekey={turnstileSiteKey} data-theme="light"></div>
 
           <button type="submit" class="bj-btn-amber w-full inline-flex items-center justify-center gap-2 px-8 py-4 rounded-full text-base font-semibold tracking-wide">
-            <Icon name="lucide:send" class="w-4 h-4" /> Submit Entry
+            <span class="bj-btn-content inline-flex items-center gap-2"><Icon name="lucide:send" class="w-4 h-4" /> Submit Entry</span>
+            <span class="bj-btn-loading"><span class="bj-spinner"></span> Submitting…</span>
           </button>
         </form>
         <script is:inline src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
@@ -432,6 +433,24 @@ const faqSchema = {
         if (nameEl) { nameEl.textContent = f.name; nameEl.hidden = false; }
         if (dz) dz.classList.add("has-file");
         if (errEl) errEl.classList.add("hidden");
+      });
+    }
+
+    // Loading state: the `submit` event fires only after native validation passes,
+    // so this just covers the real submission. Prevents double-submits.
+    var form = document.getElementById("entry-form");
+    var submitBtn = form && form.querySelector('button[type="submit"]');
+    if (form && submitBtn) {
+      form.addEventListener("submit", function () {
+        submitBtn.disabled = true;
+        submitBtn.classList.add("is-loading");
+      });
+      // Reset if the page is restored from the back/forward cache.
+      window.addEventListener("pageshow", function (e) {
+        if (e.persisted) {
+          submitBtn.disabled = false;
+          submitBtn.classList.remove("is-loading");
+        }
       });
     }
   })();

@@ -249,6 +249,22 @@ html { scroll-behavior: smooth; }
 .bj-label { font-size: 13px; font-weight: 600; color: var(--color-charcoal); letter-spacing: 0.02em; }
 .bj-help { font-size: 12px; color: var(--color-muted); margin-top: 4px; }
 
+/* Submit button loading state */
+.bj-btn-loading { display: none; }
+button.is-loading .bj-btn-content { display: none; }
+button.is-loading .bj-btn-loading { display: inline-flex; align-items: center; gap: 8px; }
+button:disabled { opacity: 0.85; cursor: not-allowed; }
+button.bj-btn-amber:disabled:hover, button.bj-btn-primary:disabled:hover { transform: none; }
+.bj-spinner {
+  width: 16px;
+  height: 16px;
+  border-radius: 999px;
+  border: 2px solid rgba(255, 255, 255, 0.45);
+  border-top-color: #fff;
+  animation: bj-spin 0.7s linear infinite;
+}
+@keyframes bj-spin { to { transform: rotate(360deg); } }
+
 /* File upload dropzone */
 .bj-dropzone {
   display: flex;

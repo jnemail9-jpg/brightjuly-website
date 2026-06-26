@@ -47,14 +47,36 @@ const tips = [
   { tag: "After School", title: "After-school light loop", d: "Take the long way home for fifteen minutes of daylight before screens take over.", img: ideaLoop },
 ];
 
-const faqSchema = {
+// The competition runs across July (entries 1 Jul → 3 Aug). AEST is UTC+10 in winter.
+const eventSchema = {
   "@context": "https://schema.org",
-  "@type": "FAQPage",
-  mainEntity: FAQ.map((f) => ({
-    "@type": "Question",
-    name: f.q,
-    acceptedAnswer: { "@type": "Answer", text: f.a },
-  })),
+  "@type": "Event",
+  name: "Bright July Outdoor Light Challenge",
+  description:
+    "A free, month-long family competition encouraging Australian families to spend more time outdoors in natural light this July. Share your family's outdoor moments with #BrightJuly and win premium sunglasses each week.",
+  startDate: "2026-07-01T00:01:00+10:00",
+  endDate: "2026-08-03T23:59:00+10:00",
+  eventStatus: "https://schema.org/EventScheduled",
+  eventAttendanceMode: "https://schema.org/OnlineEventAttendanceMode",
+  location: {
+    "@type": "VirtualLocation",
+    url: "https://brightjuly.com.au/competition",
+  },
+  image: "https://brightjuly.com.au/og-image.jpg",
+  organizer: {
+    "@type": "Organization",
+    name: "Bright July",
+    url: "https://brightjuly.com.au",
+  },
+  isAccessibleForFree: true,
+  offers: {
+    "@type": "Offer",
+    price: "0",
+    priceCurrency: "AUD",
+    availability: "https://schema.org/InStock",
+    url: "https://brightjuly.com.au/competition",
+    validFrom: "2026-06-01T00:00:00+10:00",
+  },
 };
 ---
 
@@ -62,7 +84,7 @@ const faqSchema = {
   title="Outdoor Light Challenge | Bright July Competition"
   description="Enter the Bright July Outdoor Light Challenge, submit your family's weekly outdoor moment and win premium sunglasses."
   canonical="/competition"
-  schema={[faqSchema]}
+  schema={[eventSchema]}
 >
   <main class="bj-page">
     {/* Sticky Nav */}

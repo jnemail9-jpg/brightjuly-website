@@ -114,22 +114,12 @@ const socials = [
 const communityTiles = [social5, social2, social3, social4, social1, social6, social7, social8];
 const movementTiles = [social1, social5, social7];
 
-const faqSchema = {
-  "@context": "https://schema.org",
-  "@type": "FAQPage",
-  mainEntity: faqs.map((f) => ({
-    "@type": "Question",
-    name: f.q,
-    acceptedAnswer: { "@type": "Answer", text: f.a },
-  })),
-};
 ---
 
 <Layout
   title="Bright July | Kids Outside This Winter for Healthier Eyes"
   description="Join Australian families this July. Get kids outside in natural light, reduce myopia risk and win prizes. Free to enter. Register your family today."
   canonical="/"
-  schema={[faqSchema]}
 >
   <main class="bj-page">
     {/* Sticky Nav */}

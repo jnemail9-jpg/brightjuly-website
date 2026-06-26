@@ -37,12 +37,25 @@ const baseSchema: Record<string, unknown>[] = [
     "@context": "https://schema.org",
     "@type": "Organization",
     name: "Bright July",
+    alternateName: "Bright July Outdoor Light Movement",
     url: siteURL,
     logo: `${siteURL}/favicon.png`,
+    description:
+      "Bright July is a national family movement encouraging Australian families to spend more time outdoors in natural light this July, supporting children's eye health and reducing myopia risk.",
     sameAs: [
-      "https://www.facebook.com/brightjuly",
-      "https://www.instagram.com/brightjuly",
+      "https://www.facebook.com/brightjulyAU",
+      "https://www.instagram.com/brightjulyAU",
     ],
+    contactPoint: {
+      "@type": "ContactPoint",
+      email: "hello@brightjuly.com.au",
+      contactType: "customer support",
+    },
+    parentOrganization: {
+      "@type": "Organization",
+      name: "Luxi Health Pty Ltd",
+      url: "https://luxihealth.com.au",
+    },
   },
   {
     "@context": "https://schema.org",

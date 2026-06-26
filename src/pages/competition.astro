@@ -4,7 +4,7 @@ import { Icon } from "astro-icon/components";
 import Layout from "../layouts/Layout.astro";
 import TagCallout from "../components/TagCallout.astro";
 import Nav from "../components/Nav.astro";
-import { luxiLogo, ideaPuddle, ideaClouds, social3 as ideaLoop } from "../data/images.ts";
+import { luxiLogo, ideaPuddle, ideaClouds, social3 as ideaLoop, prizeSunglasses1, prizeSunglasses2 } from "../data/images.ts";
 
 // Turnstile public site key (falls back to Cloudflare's "always passes" test key).
 const turnstileSiteKey =
@@ -178,11 +178,9 @@ const faqSchema = {
           Awarded to the most creative family outdoor moments. Submit a new entry each week for
           another chance to win.
         </p>
-        {/* TODO: replace placehold.co URLs with the supplied sunglasses prize images
-            (move files into src/assets and switch to <Image>). */}
-        <div class="mt-10 grid grid-cols-2 gap-4 md:gap-5 max-w-2xl mx-auto">
-          <img src="https://placehold.co/800x600/FBE6C8/B86F22?text=Sunglasses+Prize" alt="Premium sunglasses prize" loading="lazy" width="800" height="600" class="w-full h-auto rounded-[22px]" style="border:1px solid var(--color-line)" />
-          <img src="https://placehold.co/800x600/E4F1EF/2C5C58?text=Sunglasses+Prize" alt="Premium sunglasses prize" loading="lazy" width="800" height="600" class="w-full h-auto rounded-[22px]" style="border:1px solid var(--color-line)" />
+        <div class="mt-10 grid gap-4 md:gap-5 max-w-lg mx-auto">
+          <Image src={prizeSunglasses1} alt="Premium Ray-Ban sunglasses prize" loading="lazy" widths={[400, 800]} sizes="(min-width: 640px) 32rem, 90vw" class="w-full h-auto rounded-[22px] bg-white" style="border:1px solid var(--color-line)" />
+          <Image src={prizeSunglasses2} alt="Premium kids' Ray-Ban sunglasses prize" loading="lazy" widths={[400, 800]} sizes="(min-width: 640px) 32rem, 90vw" class="w-full h-auto rounded-[22px] bg-white" style="border:1px solid var(--color-line)" />
         </div>
       </div>
     </section>

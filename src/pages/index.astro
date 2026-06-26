@@ -12,6 +12,8 @@ import {
   johnPortrait,
   luxiLogo,
   zeissLogo,
+  prizeSunglasses1,
+  prizeSunglasses2,
   social1,
   social2,
   social3,
@@ -379,11 +381,9 @@ const faqSchema = {
               Enter The Challenge <Icon name="lucide:arrow-right" class="w-4 h-4" />
             </a>
           </div>
-          {/* TODO: replace placehold.co URLs with the supplied sunglasses prize images
-              (move files into src/assets and switch to <Image>). */}
-          <div class="grid grid-cols-2 gap-4 md:gap-5 bj-reveal">
-            <img src="https://placehold.co/800x600/FBE6C8/B86F22?text=Sunglasses+Prize" alt="Premium sunglasses prize" loading="lazy" width="800" height="600" class="w-full h-auto rounded-[22px]" style="border:1px solid var(--color-line)" />
-            <img src="https://placehold.co/800x600/E4F1EF/2C5C58?text=Sunglasses+Prize" alt="Premium sunglasses prize" loading="lazy" width="800" height="600" class="w-full h-auto rounded-[22px]" style="border:1px solid var(--color-line)" />
+          <div class="grid gap-4 md:gap-5 bj-reveal">
+            <Image src={prizeSunglasses1} alt="Premium Ray-Ban sunglasses prize" loading="lazy" widths={[400, 800]} sizes="(min-width: 768px) 42vw, 90vw" class="w-full h-auto rounded-[22px] bg-white" style="border:1px solid var(--color-line)" />
+            <Image src={prizeSunglasses2} alt="Premium kids' Ray-Ban sunglasses prize" loading="lazy" widths={[400, 800]} sizes="(min-width: 768px) 42vw, 90vw" class="w-full h-auto rounded-[22px] bg-white" style="border:1px solid var(--color-line)" />
           </div>
         </div>
       </div>

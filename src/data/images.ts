@@ -6,6 +6,8 @@ import lifestyle from "../assets/middie-family-asian.png";
 import johnPortrait from "../assets/john-nguyen-portrait.webp";
 import luxiLogo from "../assets/luxi-health-logo.png";
 import zeissLogo from "../assets/zeiss-logo.png";
+import prizeSunglasses1 from "../assets/prize-sunglasses-1.png";
+import prizeSunglasses2 from "../assets/prize-sunglasses-2.png";
 import social1 from "../assets/brightjuly-social-1.jpg";
 import social2 from "../assets/brightjuly-social-2.jpg";
 import social3 from "../assets/brightjuly-social-3-new.jpg";
@@ -24,6 +26,8 @@ export {
   johnPortrait,
   luxiLogo,
   zeissLogo,
+  prizeSunglasses1,
+  prizeSunglasses2,
   social1,
   social2,
   social3,

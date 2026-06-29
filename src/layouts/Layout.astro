@@ -8,7 +8,7 @@ import "../styles/global.css";
 export interface Props {
   title?: string;
   description?: string;
-  /** Path-relative canonical, e.g. "/competition". Defaults to the current URL. */
+  /** Path-relative canonical, e.g. "/promotion". Defaults to the current URL. */
   canonical?: string;
   /** Social share image (absolute path under /). */
   ogImage?: string;
@@ -94,16 +94,15 @@ const jsonLd = [...baseSchema, ...schema];
     }
     <meta name="theme-color" content="#FAF6EF" />
 
-    {/* Privacy-friendly analytics by Plausible */}
-    <script is:inline async src="https://plausible.io/js/pa-nG2KON_wRZsYB43orJecp.js"></script>
+    {/* Google Analytics (gtag.js) */}
+    <script is:inline async src="https://www.googletagmanager.com/gtag/js?id=G-46SK7DG5EB"></script>
     <script is:inline>
-      window.plausible =
-        window.plausible ||
-        function () {
-          (plausible.q = plausible.q || []).push(arguments);
-        };
-      plausible.init = plausible.init || function (i) { plausible.o = i || {}; };
-      plausible.init();
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag("js", new Date());
+      gtag("config", "G-46SK7DG5EB");
     </script>
 
     {/* Open Graph */}
@@ -135,27 +134,6 @@ const jsonLd = [...baseSchema, ...schema];
         <path d="M12 19V5" /><path d="m5 12 7-7 7 7" />
       </svg>
     </button>
-
-    <script is:inline>
-      // Manual analytics tagging: clicking any element with [data-analytics] fires a
-      // Plausible event. The event name is the data-analytics value; any other
-      // data-analytics-* attributes become custom props (e.g. data-analytics-cta).
-      document.addEventListener("click", function (e) {
-        var el = e.target.closest("[data-analytics]");
-        if (!el || typeof window.plausible !== "function") return;
-        var props = {};
-        for (var i = 0; i < el.attributes.length; i++) {
-          var a = el.attributes[i];
-          if (a.name.indexOf("data-analytics-") === 0) props[a.name.slice(15)] = a.value;
-        }
-        // Auto-capture the element's text as `label` unless one was set explicitly.
-        if (!props.label) {
-          var t = (el.textContent || "").trim().replace(/\s+/g, " ");
-          if (t) props.label = t.slice(0, 60);
-        }
-        window.plausible(el.getAttribute("data-analytics"), { props: props });
-      });
-    </script>
 
     <script>
       // Back-to-top: appears after scrolling, smooth-scrolls up (reduced-motion aware).

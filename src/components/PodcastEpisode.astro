@@ -33,13 +33,13 @@ const thumbUrl = videoId ? `https://i.ytimg.com/vi/${videoId}/hqdefault.jpg` : n
         style={`background-image:linear-gradient(135deg, rgba(217,142,63,0.55), rgba(63,127,122,0.5)), url(${thumbUrl})`}
       >
         <span class="ep-num">Episode {n}</span>
-        <div class="bj-play-button"><Icon name="lucide:play" class="w-4 h-4 ml-0.5" /></div>
+        <div class="bj-play-button"><Icon aria-hidden="true" name="lucide:play" class="w-4 h-4 ml-0.5" /></div>
       </a>
     ) : (
       <div class="bj-video-placeholder">
         <span class="ep-num">Episode {n}</span>
         <span class="bj-soon-pill">Premieres {date}</span>
-        <div class="bj-play-button"><Icon name="lucide:play" class="w-4 h-4 ml-0.5" /></div>
+        <div class="bj-play-button"><Icon aria-hidden="true" name="lucide:play" class="w-4 h-4 ml-0.5" /></div>
       </div>
     )
   }

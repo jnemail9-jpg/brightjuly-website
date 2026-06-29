@@ -21,7 +21,7 @@ const { brandHref = "/", links, cta } = Astro.props;
     </nav>
 
     <div class="flex items-center gap-2 shrink-0">
-      <a href={cta.href} class="bj-btn-primary text-sm font-medium px-5 py-2.5 rounded-full whitespace-nowrap hidden lg:inline-flex" data-analytics="CTA Click" data-analytics-cta={cta.label} data-analytics-location="nav">
+      <a href={cta.href} class="bj-btn-primary text-sm font-medium px-5 py-2.5 rounded-full whitespace-nowrap hidden lg:inline-flex">
         {cta.label}
       </a>
       <button
@@ -32,8 +32,8 @@ const { brandHref = "/", links, cta } = Astro.props;
         aria-expanded="false"
         aria-controls="bj-mobile-nav"
       >
-        <Icon name="lucide:menu" class="w-6 h-6 bj-burger-open" />
-        <Icon name="lucide:x" class="w-6 h-6 bj-burger-close" />
+        <Icon aria-hidden="true" name="lucide:menu" class="w-6 h-6 bj-burger-open" />
+        <Icon aria-hidden="true" name="lucide:x" class="w-6 h-6 bj-burger-close" />
       </button>
     </div>
   </div>
@@ -41,7 +41,7 @@ const { brandHref = "/", links, cta } = Astro.props;
   <div id="bj-mobile-nav" class="bj-mobnav-panel lg:hidden" hidden>
     <nav class="max-w-7xl mx-auto px-6 py-3 flex flex-col">
       {links.map((l) => <a href={l.href} class="bj-mobnav-link">{l.label}</a>)}
-      <a href={cta.href} class="bj-btn-primary mt-4 inline-flex items-center justify-center px-5 py-3 rounded-full text-sm font-semibold tracking-wide" data-analytics="CTA Click" data-analytics-cta={cta.label} data-analytics-location="nav-mobile">
+      <a href={cta.href} class="bj-btn-primary mt-4 inline-flex items-center justify-center px-5 py-3 rounded-full text-sm font-semibold tracking-wide">
         {cta.label}
       </a>
     </nav>

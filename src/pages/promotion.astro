@@ -11,32 +11,26 @@ const turnstileSiteKey =
   import.meta.env.PUBLIC_TURNSTILE_SITE_KEY ?? "1x00000000000000000000AA";
 
 const DEADLINES = [
-  { day: "7", month: "Jul", weekday: "Tue", label: "Week 1" },
-  { day: "14", month: "Jul", weekday: "Tue", label: "Week 2" },
-  { day: "21", month: "Jul", weekday: "Tue", label: "Week 3" },
-  { day: "28", month: "Jul", weekday: "Tue", label: "Week 4" },
-];
-
-const WINNERS = [
-  "Mon 13 Jul, Week 1 winners",
-  "Mon 20 Jul, Week 2 winners",
-  "Mon 27 Jul, Week 3 winners",
-  "Mon 3 Aug, Week 4 winners",
+  { week: "Week 1", period: "1 July – 5 July 2026", close: "Sunday 5 July 2026, 11:59pm" },
+  { week: "Week 2", period: "6 July – 12 July 2026", close: "Sunday 12 July 2026, 11:59pm" },
+  { week: "Week 3", period: "13 July – 19 July 2026", close: "Sunday 19 July 2026, 11:59pm" },
+  { week: "Week 4", period: "20 July – 26 July 2026", close: "Sunday 26 July 2026, 11:59pm" },
+  { week: "Week 5", period: "27 July – 2 August 2026", close: "Sunday 2 August 2026, 11:59pm" },
 ];
 
 const FAQ = [
-  { q: "Who can enter the Bright July competition?", a: "Any Australian family. Parents or guardians enter on behalf of their household." },
-  { q: "How do I enter?", a: "First, make a pledge as a family and write it down together, a simple shared commitment for the month. Then submit a weekly entry using the form on this page. Sharing on social with #BrightJuly is encouraged but not required, for private entries, just provide a caption and a screenshot of your private post (screenshot optional)." },
+  { q: "Who can enter the Bright July promotion?", a: "Any Australian family. Parents or guardians enter on behalf of their household." },
+  { q: "How do I enter?", a: "First, make a pledge as a family and write it down together, a simple shared commitment for the month. Then submit a weekly entry using the form on this page. Sharing on social with #brightjulyAU is encouraged but not required, for private entries, just provide a caption and a screenshot of your private post (screenshot optional)." },
   { q: "How are entries judged?", a: "Entries are judged, not randomly drawn, based on creativity, authentic family participation, alignment with the Bright July mission, storytelling, and the most creative outdoor journey." },
-  { q: "Can I enter privately without posting on social media?", a: "Yes. For private entries, just provide a caption and a screenshot of your private post (screenshot optional) via the entry form. The #BrightJuly hashtag is encouraged but not required." },
+  { q: "Can I enter privately without posting on social media?", a: "Yes. For private entries, just provide a caption and a screenshot of your private post (screenshot optional) via the entry form. The #brightjulyAU hashtag is encouraged but not required." },
   { q: "Can I submit more than once?", a: "Yes. You're encouraged to submit a new entry each week of the campaign." },
-  { q: "When are winners announced?", a: "Weekly winners are announced the Monday after each Tuesday 5pm AEST deadline: Mon 13 Jul (Week 1), Mon 20 Jul (Week 2), Mon 27 Jul (Week 3) and Mon 3 Aug (Week 4)." },
+  { q: "When are winners announced?", a: "Two winners (photo and written) are chosen for each of the five weekly draws and notified by email and phone within 5 business days of that week's Sunday 11:59pm AEST close." },
   { q: "Is there a cost to join?", a: "No. Bright July is free for every family." },
-  { q: "What about photos of my children?", a: "Only share what you're comfortable with. See our Privacy Policy and Competition T&Cs for full details." },
+  { q: "What about photos of my children?", a: "Only share what you're comfortable with. See our Privacy Policy and Promotion Terms for full details." },
 ];
 
 const steps = [
-  { n: "01", title: "Post & Tag", d: "Share your outdoor moment on social media. Tag Bright July and use #BrightJuly." },
+  { n: "01", title: "Post & Tag", d: "Share your outdoor moment on social media. Tag @brightjulyAU and use #brightjulyAU." },
   { n: "02", title: "Submit", d: "Register your family squad and submit your entry using the form below." },
   { n: "03", title: "Win", d: "Win exciting weekly prizes. Two pairs of premium sunglasses awarded each week for the best outdoor moments." },
 ];
@@ -47,20 +41,20 @@ const tips = [
   { tag: "After School", title: "After-school light loop", d: "Take the long way home for fifteen minutes of daylight before screens take over.", img: ideaLoop },
 ];
 
-// The competition runs across July (entries 1 Jul → 3 Aug). AEST is UTC+10 in winter.
+// The promotion runs across July (entries 1 Jul → 3 Aug). AEST is UTC+10 in winter.
 const eventSchema = {
   "@context": "https://schema.org",
   "@type": "Event",
   name: "Bright July Outdoor Light Challenge",
   description:
-    "A free, month-long family competition encouraging Australian families to spend more time outdoors in natural light this July. Share your family's outdoor moments with #BrightJuly and win premium sunglasses each week.",
+    "A free, month-long family promotion encouraging Australian families to spend more time outdoors in natural light this July. Share your family's outdoor moments with #brightjulyAU and win premium sunglasses each week.",
   startDate: "2026-07-01T00:01:00+10:00",
   endDate: "2026-08-03T23:59:00+10:00",
   eventStatus: "https://schema.org/EventScheduled",
   eventAttendanceMode: "https://schema.org/OnlineEventAttendanceMode",
   location: {
     "@type": "VirtualLocation",
-    url: "https://brightjuly.com.au/competition",
+    url: "https://brightjuly.com.au/promotion",
   },
   image: "https://brightjuly.com.au/og-image.jpg",
   organizer: {
@@ -74,16 +68,16 @@ const eventSchema = {
     price: "0",
     priceCurrency: "AUD",
     availability: "https://schema.org/InStock",
-    url: "https://brightjuly.com.au/competition",
+    url: "https://brightjuly.com.au/promotion",
     validFrom: "2026-06-01T00:00:00+10:00",
   },
 };
 ---
 
 <Layout
-  title="Outdoor Light Challenge | Bright July Competition"
+  title="Outdoor Light Challenge | Bright July Promotion"
   description="Enter the Bright July Outdoor Light Challenge, submit your family's weekly outdoor moment and win premium sunglasses."
-  canonical="/competition"
+  canonical="/promotion"
   schema={[eventSchema]}
 >
   <main class="bj-page">
@@ -94,7 +88,7 @@ const eventSchema = {
         { label: "How It Works", href: "/#how" },
         { label: "Outdoor Ideas", href: "/#ideas" },
         { label: "Community", href: "/#community" },
-        { label: "Competition", href: "/competition" },
+        { label: "Promotion", href: "/promotion" },
       ]}
       cta={{ label: "Submit Your Entry", href: "#entry" }}
     />
@@ -102,26 +96,26 @@ const eventSchema = {
     {/* HERO */}
     <section id="top" class="pt-32 md:pt-40 pb-16 md:pb-24 bj-amber-grad">
       <div class="max-w-5xl mx-auto px-6 md:px-10 text-center">
-        <Icon name="lucide:trophy" class="w-8 h-8 mx-auto" style="color:var(--color-amber-deep)" />
-        <span class="bj-eyebrow block mt-5">Bright July Competition</span>
+        <Icon aria-hidden="true" name="lucide:trophy" class="w-8 h-8 mx-auto" style="color:var(--color-amber-deep)" />
+        <span class="bj-eyebrow block mt-5">Bright July Promotion</span>
         <h1 class="mt-6 text-5xl md:text-7xl leading-[1.02]">
-          <span style="color:var(--color-amber-deep)">#BrightJuly</span><br />Outdoor Light Challenge.
+          <span style="color:var(--color-amber-deep)">#brightjulyAU</span><br />Outdoor Light Challenge.
         </h1>
         <p class="mt-7 max-w-2xl mx-auto text-lg md:text-xl leading-[1.7]" style="color:var(--color-ink)">
           How families make more time outdoors together. Share your moment with
-          <span class="font-semibold" style="color:var(--color-charcoal)">#BrightJuly</span> and tag
+          <span class="font-semibold" style="color:var(--color-charcoal)">#brightjulyAU</span> and tag
           <span class="font-semibold" style="color:var(--color-charcoal)">@brightjulyAU</span>.
         </p>
         <div class="mt-10 flex flex-col sm:flex-row items-center justify-center gap-3">
-          <a href="#entry" class="bj-btn-amber inline-flex items-center justify-center gap-2 px-8 py-4 rounded-full text-base font-semibold tracking-wide" data-analytics="CTA Click" data-analytics-location="competition-hero">
-            Submit Your Entry <Icon name="lucide:arrow-right" class="w-4 h-4" />
+          <a href="#entry" class="bj-btn-amber inline-flex items-center justify-center gap-2 px-8 py-4 rounded-full text-base font-semibold tracking-wide">
+            Submit Your Entry <Icon aria-hidden="true" name="lucide:arrow-right" class="w-4 h-4" />
           </a>
           <a href="#how" class="inline-flex items-center justify-center px-8 py-4 rounded-full text-base font-semibold tracking-wide bg-white" style="color:var(--color-charcoal);border:1px solid var(--color-line)">
             How It Works
           </a>
         </div>
         <div class="mt-10 max-w-xl mx-auto text-left">
-          <TagCallout submitText="Submit your entry through the form on this page." />
+          <TagCallout formHref="#entry" />
         </div>
       </div>
     </section>
@@ -151,41 +145,40 @@ const eventSchema = {
     <section class="py-20 md:py-28 bj-teal-grad">
       <div class="max-w-6xl mx-auto px-6 md:px-10">
         <div class="text-center max-w-2xl mx-auto">
-          <Icon name="lucide:calendar-check" class="w-8 h-8 mx-auto" style="color:var(--color-teal-deep)" />
+          <Icon aria-hidden="true" name="lucide:calendar-check" class="w-8 h-8 mx-auto" style="color:var(--color-teal-deep)" />
           <span class="bj-eyebrow block mt-4">Weekly Submission Deadlines</span>
-          <h2 class="mt-5 text-3xl md:text-5xl leading-[1.08]">Submit Your Entry By 5pm AEST Every Tuesday.</h2>
+          <h2 class="mt-5 text-3xl md:text-5xl leading-[1.08]">Submit Your Entry By 11:59pm AEST Every Sunday.</h2>
           <p class="mt-5 text-base md:text-lg leading-[1.7]" style="color:var(--color-ink)">
-            Four Tuesdays. Four chances to win. Each card below is a submission deadline, get your weekly entry in before the clock hits 5pm AEST.
+            Five weekly draws across July. Each row below is a submission deadline — get your entry in before the clock hits 11:59pm AEST on the Sunday.
           </p>
         </div>
 
-        <div class="mt-12 grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4">
-          {DEADLINES.map((d) => (
-            <div class="bj-card relative rounded-[22px] p-6 bg-white text-center" style="border:1px solid var(--color-line)">
-              <div class="text-[11px] tracking-[0.18em] uppercase font-semibold" style="color:var(--color-amber-deep)">{d.label}</div>
-              <div class="mt-4 flex items-baseline justify-center gap-1.5">
-                <span class="serif text-5xl md:text-6xl leading-none" style="color:var(--color-charcoal)">{d.day}</span>
-                <span class="serif text-lg md:text-xl" style="color:var(--color-teal-deep)">{d.month}</span>
-              </div>
-              <div class="mt-3 text-[11px] tracking-[0.14em] uppercase" style="color:var(--color-muted)">{d.weekday} · Entries close 5pm</div>
-            </div>
-          ))}
-        </div>
-
-        <div class="mt-10 max-w-2xl mx-auto rounded-2xl bg-white p-5 md:p-6" style="border:1px solid var(--color-line)">
-          <div class="text-[11px] tracking-[0.18em] uppercase font-semibold text-center" style="color:var(--color-teal-deep)">Winner Announcements</div>
-          <ul class="mt-4 grid sm:grid-cols-2 gap-x-6 gap-y-2 text-sm md:text-base" style="color:var(--color-ink)">
-            {WINNERS.map((w) => (
-              <li class="flex items-center gap-2">
-                <span class="w-1.5 h-1.5 rounded-full" style="background:var(--color-amber-deep)"></span>
-                {w}
-              </li>
-            ))}
-          </ul>
+        <div class="mt-12 max-w-4xl mx-auto overflow-x-auto rounded-[22px] bg-white" style="border:1px solid var(--color-line)">
+          <table class="w-full text-left" style="border-collapse:collapse">
+            <thead>
+              <tr>
+                <th scope="col" class="px-5 py-4 text-sm font-bold whitespace-nowrap" style="color:var(--color-charcoal);border-bottom:1px solid var(--color-line)">Promotion Week</th>
+                <th scope="col" class="px-5 py-4 text-sm font-bold whitespace-nowrap" style="color:var(--color-charcoal);border-bottom:1px solid var(--color-line)">Campaign Period</th>
+                <th scope="col" class="px-5 py-4 text-sm font-bold whitespace-nowrap" style="color:var(--color-charcoal);border-bottom:1px solid var(--color-line)">Entries Close</th>
+              </tr>
+            </thead>
+            <tbody>
+              {DEADLINES.map((d, i) => {
+                const rule = i < DEADLINES.length - 1 ? "border-bottom:1px solid var(--color-line)" : "";
+                return (
+                  <tr>
+                    <td class="px-5 py-4 text-sm md:text-base font-semibold whitespace-nowrap" style={`color:var(--color-charcoal);${rule}`}>{d.week}</td>
+                    <td class="px-5 py-4 text-sm md:text-base" style={`color:var(--color-ink);${rule}`}>{d.period}</td>
+                    <td class="px-5 py-4 text-sm md:text-base whitespace-nowrap" style={`color:var(--color-ink);${rule}`}>{d.close}</td>
+                  </tr>
+                );
+              })}
+            </tbody>
+          </table>
         </div>
 
         <p class="mt-8 text-center text-sm" style="color:var(--color-muted)">
-          All times are AEST. Late entries roll into the following week.
+          All times are AEST.
         </p>
       </div>
     </section>
@@ -193,7 +186,7 @@ const eventSchema = {
     {/* THE PRIZE */}
     <section class="py-20 md:py-28" style="background:#FFFDF8;border-top:1px solid var(--color-line)">
       <div class="max-w-5xl mx-auto px-6 md:px-10 text-center">
-        <Icon name="lucide:gift" class="w-8 h-8 mx-auto" style="color:var(--color-amber-deep)" />
+        <Icon aria-hidden="true" name="lucide:gift" class="w-8 h-8 mx-auto" style="color:var(--color-amber-deep)" />
         <span class="bj-eyebrow block mt-4">What You Can Win</span>
         <h2 class="mt-5 text-3xl md:text-5xl leading-[1.08]">Two pairs of premium sunglasses, every week.</h2>
         <p class="mt-5 max-w-2xl mx-auto text-base md:text-lg leading-[1.7]" style="color:var(--color-muted)">
@@ -211,7 +204,7 @@ const eventSchema = {
     <section id="entry" class="py-24 md:py-32" style="background:#FFFDF8">
       <div class="max-w-3xl mx-auto px-6 md:px-10">
         <div class="text-center mb-12">
-          <Icon name="lucide:sparkles" class="w-7 h-7 mx-auto" style="color:var(--color-amber-deep)" />
+          <Icon aria-hidden="true" name="lucide:sparkles" class="w-7 h-7 mx-auto" style="color:var(--color-amber-deep)" />
           <span class="bj-eyebrow block mt-4">Your Entry</span>
           <h2 class="mt-5 text-4xl md:text-5xl leading-[1.05]">Submit Your Weekly Moment.</h2>
           <p class="mt-5 text-base md:text-lg" style="color:var(--color-muted)">One short form. Your family's outdoor story.</p>
@@ -267,18 +260,18 @@ const eventSchema = {
               <input id="url" name="url" type="url" placeholder="https://instagram.com/p/..." class="bj-input mt-2" />
               <p class="bj-help">Optional. Link directly to your social post.</p>
               <div class="mt-3 flex items-start gap-2.5 rounded-xl px-4 py-3 text-sm leading-relaxed" style="background:var(--color-teal-pale);color:var(--color-teal-deep);border:1px solid var(--color-line)">
-                <Icon name="lucide:hash" class="w-4 h-4 mt-0.5 flex-shrink-0" />
+                <Icon aria-hidden="true" name="lucide:hash" class="w-4 h-4 mt-0.5 flex-shrink-0" />
                 <span>
                   <span class="font-semibold">Reminder:</span> Tag
                   <span class="font-mono font-bold">@brightjulyAU</span> and use
-                  <span class="font-mono font-bold">#BrightJuly</span> in your post to help us find and share your entry.
+                  <span class="font-mono font-bold">#brightjulyAU</span> in your post to help us find and share your entry.
                 </span>
               </div>
             </div>
             <div>
               <label class="bj-label" for="photo">Upload Photo / Screenshot</label>
               <label for="photo" class="bj-dropzone mt-2">
-                <span class="bj-dropzone-icon"><Icon name="lucide:upload-cloud" class="w-5 h-5" /></span>
+                <span class="bj-dropzone-icon"><Icon aria-hidden="true" name="lucide:upload-cloud" class="w-5 h-5" /></span>
                 <span class="bj-dropzone-main">Choose a photo or screenshot</span>
                 <span class="bj-dropzone-sub">JPG, PNG or WEBP · Max 50MB</span>
                 <span id="photo-name" class="bj-dropzone-file" hidden></span>
@@ -287,13 +280,32 @@ const eventSchema = {
               <p class="bj-help">Optional. Upload a photo that may be featured on the Bright July website or social channels.</p>
             </div>
             <div>
-              <label class="bj-label" for="story">Story / Caption *</label>
+              <label class="bj-label" for="story">Story / Caption * <span style="font-weight:400;color:var(--color-muted)">(Up to 25 words)</span></label>
               <textarea id="story" name="story" rows="5" required placeholder="Tell us about your outdoor adventure." class="bj-input mt-2"></textarea>
             </div>
           </fieldset>
 
           <fieldset class="space-y-4 pt-4" style="border-top:1px solid var(--color-line)">
             <legend class="serif text-2xl mb-2 pt-6" style="color:var(--color-charcoal)">Consent</legend>
+
+            {/* Privacy Collection Notice — displayed with the promotion sign-up form (APP 5). */}
+            <details class="rounded-2xl text-sm leading-relaxed" style="background:var(--color-teal-pale);color:var(--color-teal-deep);border:1px solid var(--color-line)">
+              <summary class="flex items-center gap-2 cursor-pointer list-none px-5 py-4 font-semibold">
+                <Icon aria-hidden="true" name="lucide:shield-check" class="w-4 h-4 flex-shrink-0" />
+                Privacy Collection Notice
+              </summary>
+              <div class="px-5 pb-5 space-y-3" style="color:var(--color-ink)">
+                <p>This Privacy Collection Notice describes how Luxi Health Pty Ltd (ABN 60 689 732 910) (we, us or our) collects and handles your personal information when you enter the Bright July promotion.</p>
+                <p>We collect personal information from you so that we can administer the promotion, notify winners, and (where you have expressly consented) share your information with our named sponsors and related not-for-profit partner for the purposes described in our <a href="/privacy" class="underline">Privacy Policy</a>.</p>
+                <p>If you are selected as a Winner and do not opt out, your first name, suburb, and submitted content may be shared publicly via email and on our social media channels.</p>
+                <p>We may disclose this personal information to third parties, including our personnel, related entities, any third parties engaged by us and acting on our behalf and as otherwise set out in our Privacy Policy.</p>
+                <p>We store personal information in Australia. Where we disclose your personal information to third parties, those third parties may store, transfer or access personal information outside of Australia.</p>
+                <p>If you do not provide your personal information to us, it may affect our ability to do business with you.</p>
+                <p>Please see our <a href="/privacy" class="underline">Privacy Policy</a> for more information about how we collect, store, use and disclose your personal information, including details about overseas disclosure, access, correction, how you can make a privacy-related complaint and our complaint-handling process.</p>
+                <p>If you have questions about our privacy practices, please contact us by email at <a href="mailto:hello@brightjuly.com.au" class="underline">hello@brightjuly.com.au</a>. By providing your personal information to us, you agree to the collection, use, storage and disclosure of that information as described in this privacy collection notice.</p>
+              </div>
+            </details>
+
             <label class="flex items-start gap-3 text-sm" style="color:var(--color-ink)">
               <input type="checkbox" name="consent_promo" value="yes" required class="mt-1" />
               <span>I consent to Bright July using my submitted content for promotional purposes.</span>
@@ -302,9 +314,10 @@ const eventSchema = {
               <input type="checkbox" name="consent_terms" value="yes" required class="mt-1" />
               <span>
                 I accept the
-                <a href="/competition-terms" class="underline">Competition Terms &amp; Conditions</a>
+                <a href="/promotion-terms" class="underline">Promotion Terms</a>,
+                <a href="/privacy" class="underline">Privacy Policy</a>
                 and
-                <a href="/privacy" class="underline">Privacy Policy</a>.
+                <a href="/terms" class="underline">general T&amp;Cs</a>.
               </span>
             </label>
             <label class="flex items-start gap-3 text-sm" style="color:var(--color-ink)">
@@ -318,7 +331,7 @@ const eventSchema = {
           <div class="cf-turnstile" data-sitekey={turnstileSiteKey} data-theme="light"></div>
 
           <button type="submit" class="bj-btn-amber w-full inline-flex items-center justify-center gap-2 px-8 py-4 rounded-full text-base font-semibold tracking-wide">
-            <span class="bj-btn-content inline-flex items-center gap-2"><Icon name="lucide:send" class="w-4 h-4" /> Submit Entry</span>
+            <span class="bj-btn-content inline-flex items-center gap-2"><Icon aria-hidden="true" name="lucide:send" class="w-4 h-4" /> Submit Entry</span>
             <span class="bj-btn-loading"><span class="bj-spinner"></span> Submitting…</span>
           </button>
         </form>
@@ -338,7 +351,7 @@ const eventSchema = {
             spend more time outside together.
           </p>
           <a href="/#ideas" class="mt-7 inline-flex items-center gap-2 px-6 py-3 rounded-full text-sm font-semibold tracking-wide" style="border:1px solid var(--color-charcoal);color:var(--color-charcoal)">
-            Explore Tips &amp; Ideas <Icon name="lucide:arrow-right" class="w-4 h-4" />
+            Explore Tips &amp; Ideas <Icon aria-hidden="true" name="lucide:arrow-right" class="w-4 h-4" />
           </a>
         </div>
 
@@ -363,7 +376,7 @@ const eventSchema = {
     <section class="py-20 md:py-28" style="background:var(--color-cream)">
       <div class="max-w-3xl mx-auto px-6 md:px-10">
         <div class="mb-10">
-          <span class="bj-eyebrow">Competition FAQ</span>
+          <span class="bj-eyebrow">Promotion FAQ</span>
           <div class="bj-rule mt-4 mb-6"></div>
           <h2 class="text-3xl md:text-4xl">Questions, answered.</h2>
         </div>
@@ -372,7 +385,7 @@ const eventSchema = {
             <details class="group rounded-2xl bg-white p-5 md:p-6" style="border:1px solid var(--color-line)">
               <summary class="flex items-center justify-between cursor-pointer list-none text-base md:text-lg font-semibold" style="color:var(--color-charcoal)">
                 {item.q}
-                <Icon name="lucide:chevron-down" class="w-5 h-5 transition-transform group-open:rotate-180" style="color:var(--color-amber-deep)" />
+                <Icon aria-hidden="true" name="lucide:chevron-down" class="w-5 h-5 transition-transform group-open:rotate-180" style="color:var(--color-amber-deep)" />
               </summary>
               <p class="mt-3 text-sm md:text-base leading-relaxed" style="color:var(--color-muted)">{item.a}</p>
             </details>
@@ -380,7 +393,7 @@ const eventSchema = {
         </div>
 
         <div class="mt-10 flex flex-wrap items-center gap-x-7 gap-y-3 text-sm" style="color:var(--color-muted)">
-          <a href="/competition-terms" class="underline-offset-4 hover:underline">Competition T&amp;Cs</a>
+          <a href="/promotion-terms" class="underline-offset-4 hover:underline">Promotion T&amp;Cs</a>
           <a href="/privacy" class="underline-offset-4 hover:underline">Privacy Policy</a>
           <a href="/terms" class="underline-offset-4 hover:underline">Website Terms</a>
         </div>
@@ -395,7 +408,7 @@ const eventSchema = {
           <span class="text-xs tracking-[0.22em] uppercase">A Family Outdoor Movement</span>
         </div>
         <div class="flex items-center gap-6 text-xs">
-          <a href="/competition-terms" class="hover:text-white">Competition Terms</a>
+          <a href="/promotion-terms" class="hover:text-white">Promotion Terms</a>
           <a href="/privacy" class="hover:text-white">Privacy</a>
           <a href="/terms" class="hover:text-white">Website Terms</a>
         </div>

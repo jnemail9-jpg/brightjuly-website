@@ -18,11 +18,11 @@ const { title, description, canonical, heading, updated } = Astro.props;
     <header class="border-b" style="border-color:var(--color-line);background:rgba(250,246,239,0.92);backdrop-filter:blur(10px)">
       <div class="max-w-7xl mx-auto px-6 md:px-10 h-16 flex items-center justify-between">
         <a href="/" class="flex items-center gap-2 text-sm tracking-wide" style="color:var(--color-charcoal)">
-          <Icon name="lucide:sun" class="w-4 h-4" style="color:var(--color-amber-deep)" />
+          <Icon aria-hidden="true" name="lucide:sun" class="w-4 h-4" style="color:var(--color-amber-deep)" />
           <span class="serif text-lg">Bright July</span>
         </a>
         <a href="/" class="inline-flex items-center gap-2 text-xs tracking-widest uppercase" style="color:var(--color-muted)">
-          <Icon name="lucide:arrow-left" class="w-3.5 h-3.5" /> Back Home
+          <Icon aria-hidden="true" name="lucide:arrow-left" class="w-3.5 h-3.5" /> Back Home
         </a>
       </div>
     </header>
@@ -45,7 +45,7 @@ const { title, description, canonical, heading, updated } = Astro.props;
           <span class="text-xs tracking-[0.22em] uppercase">A Family Outdoor Movement</span>
         </div>
         <div class="flex items-center gap-6 text-xs">
-          <a href="/competition-terms" class="hover:text-white">Competition Terms</a>
+          <a href="/promotion-terms" class="hover:text-white">Promotion Terms</a>
           <a href="/privacy" class="hover:text-white">Privacy Policy</a>
           <a href="/terms" class="hover:text-white">Website Terms</a>
         </div>

@@ -14,7 +14,7 @@ const tips = [
 <Layout
   title="Entry received | Bright July"
   description="Thanks for entering the Bright July Outdoor Light Challenge."
-  canonical="/competition/success"
+  canonical="/promotion/success"
   noindex
 >
   <div class="bj-page">
@@ -22,11 +22,11 @@ const tips = [
     <header class="border-b" style="border-color:var(--color-line);background:rgba(250,246,239,0.92);backdrop-filter:blur(10px)">
       <div class="max-w-7xl mx-auto px-6 md:px-10 h-16 flex items-center justify-between">
         <a href="/" class="flex items-center gap-2 text-sm tracking-wide" style="color:var(--color-charcoal)">
-          <Icon name="lucide:sun" class="w-4 h-4" style="color:var(--color-amber-deep)" />
+          <Icon aria-hidden="true" name="lucide:sun" class="w-4 h-4" style="color:var(--color-amber-deep)" />
           <span class="serif text-lg">Bright July</span>
         </a>
         <a href="/" class="inline-flex items-center gap-2 text-xs tracking-widest uppercase" style="color:var(--color-muted)">
-          <Icon name="lucide:arrow-left" class="w-3.5 h-3.5" /> Back Home
+          <Icon aria-hidden="true" name="lucide:arrow-left" class="w-3.5 h-3.5" /> Back Home
         </a>
       </div>
     </header>
@@ -34,7 +34,7 @@ const tips = [
     {/* Success */}
     <section class="py-20 md:py-28 bj-amber-grad">
       <div class="max-w-3xl mx-auto px-6 md:px-10 text-center">
-        <Icon name="lucide:check-circle-2" class="w-14 h-14 mx-auto" style="color:var(--color-teal)" />
+        <Icon aria-hidden="true" name="lucide:check-circle-2" class="w-14 h-14 mx-auto" style="color:var(--color-teal)" />
         <h1 class="mt-6 text-4xl md:text-6xl leading-[1.05]">Thanks for joining Bright July!</h1>
         <p class="mt-5 text-lg md:text-xl" style="color:var(--color-ink)">Your entry has been received.</p>
         <p class="mt-2 text-base" style="color:var(--color-muted)">
@@ -55,7 +55,7 @@ const tips = [
             ideas and simple ways to spend more time outside together.
           </p>
           <a href="/#ideas" class="mt-7 inline-flex items-center gap-2 px-6 py-3 rounded-full text-sm font-semibold tracking-wide" style="border:1px solid var(--color-charcoal);color:var(--color-charcoal)">
-            Explore Bright July Tips &amp; Ideas <Icon name="lucide:arrow-right" class="w-4 h-4" />
+            Explore Bright July Tips &amp; Ideas <Icon aria-hidden="true" name="lucide:arrow-right" class="w-4 h-4" />
           </a>
         </div>
 
@@ -79,7 +79,7 @@ const tips = [
     {/* Find a Local Optometrist, placeholder until John's list + matching rule land */}
     <section class="py-20 md:py-24 bj-teal-grad">
       <div class="max-w-3xl mx-auto px-6 md:px-10 text-center">
-        <Icon name="lucide:map-pin" class="w-7 h-7 mx-auto" style="color:var(--color-teal-deep)" />
+        <Icon aria-hidden="true" name="lucide:map-pin" class="w-7 h-7 mx-auto" style="color:var(--color-teal-deep)" />
         <span class="bj-eyebrow block mt-4">Find a Local Optometrist</span>
         <h2 class="mt-5 text-3xl md:text-4xl leading-[1.08]">Eye-care partners near you.</h2>
         <p class="mt-5 text-base md:text-lg leading-[1.7]" style="color:var(--color-muted)">
@@ -97,16 +97,11 @@ const tips = [
           <span class="text-xs tracking-[0.22em] uppercase">A Family Outdoor Movement</span>
         </div>
         <div class="flex items-center gap-6 text-xs">
-          <a href="/competition-terms" class="hover:text-white">Competition Terms</a>
+          <a href="/promotion-terms" class="hover:text-white">Promotion Terms</a>
           <a href="/privacy" class="hover:text-white">Privacy Policy</a>
           <a href="/terms" class="hover:text-white">Website Terms</a>
         </div>
       </div>
     </footer>
   </div>
-
-  {/* Conversion: this page is only reached after a successful entry. */}
-  <script is:inline>
-    if (typeof window.plausible === "function") window.plausible("Competition Entry");
-  </script>
 </Layout>

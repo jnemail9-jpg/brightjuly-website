@@ -16,7 +16,7 @@ export default defineConfig({
   integrations: [
     sitemap({
       // Keep noindex / post-submit pages out of the sitemap.
-      filter: (page) => !page.includes("/competition/success"),
+      filter: (page) => !page.includes("/promotion/success"),
     }),
     icon(),
   ],

@@ -214,7 +214,7 @@ html { scroll-behavior: smooth; }
   font-size: 11px;
   letter-spacing: 0.22em;
   text-transform: uppercase;
-  color: var(--color-teal);
+  color: var(--color-teal-deep);
   font-weight: 600;
 }
 .bj-rule { width: 36px; height: 1px; background: var(--color-charcoal); opacity: 0.3; }
@@ -233,7 +233,7 @@ html { scroll-behavior: smooth; }
 .bj-progress { height: 8px; background: var(--color-cream-soft); border-radius: 9999px; overflow: hidden; }
 .bj-progress > span { display: block; height: 100%; background: linear-gradient(90deg, var(--color-amber), var(--color-amber-deep)); border-radius: 9999px; }
 
-/* Form controls (competition entry form) */
+/* Form controls (promotion entry form) */
 .bj-input {
   width: 100%;
   background: #fff;
@@ -374,6 +374,13 @@ button.bj-btn-amber:disabled:hover, button.bj-btn-primary:disabled:hover { trans
   font-family: var(--font-sans);
 }
 .bj-tag-callout.dark li .num { background: rgba(255, 255, 255, 0.18); color: #fff; }
+.bj-tag-callout a {
+  color: var(--color-amber-deep);
+  font-weight: 700;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+.bj-tag-callout.dark a { color: #fff; }
 
 /* ------------------------------------------------------------------ *
  * Podcast section

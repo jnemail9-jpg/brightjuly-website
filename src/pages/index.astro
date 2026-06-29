@@ -57,21 +57,21 @@ const steps = [
     n: "03",
     icon: "lucide:gift",
     title: "Submit & Win",
-    d: "Share your outdoor moment on Facebook or Instagram using #BrightJuly and tag @brightjulyAU, then enter the weekly prize draw via the entry form.",
+    d: "Share your outdoor moment on Facebook or Instagram using #brightjulyAU and tag @brightjulyAU, then enter the weekly prize draw via the entry form.",
     cta: "Enter to win",
-    href: "/competition",
+    href: "/promotion",
   },
 ];
 
 const faqs = [
-  { q: "Who can enter the Bright July competition?", a: "Any Australian family. Parents or guardians enter on behalf of their household." },
-  { q: "How do I enter?", a: "First, make a pledge as a family and write it down together, a simple shared commitment for the month. Then submit a weekly entry via the form on the competition page. Using #BrightJuly on social posts is encouraged but not compulsory, if you'd prefer to enter privately, just provide a caption and a screenshot of your private post (screenshot optional)." },
+  { q: "Who can enter the Bright July promotion?", a: "Any Australian family. Parents or guardians enter on behalf of their household." },
+  { q: "How do I enter?", a: "First, make a pledge as a family and write it down together, a simple shared commitment for the month. Then submit a weekly entry via the form on the promotion page. Using #brightjulyAU on social posts is encouraged but not compulsory, if you'd prefer to enter privately, just provide a caption and a screenshot of your private post (screenshot optional)." },
   { q: "How are entries judged?", a: "Entries are judged, not randomly drawn, based on creativity, authentic family participation, alignment with the Bright July mission, storytelling, and the most creative outdoor journey." },
-  { q: "Can I enter privately without posting on social media?", a: "Yes. For private entries, just provide a caption and a screenshot of your private post (screenshot optional) via the entry form. The #BrightJuly hashtag is encouraged but not required." },
+  { q: "Can I enter privately without posting on social media?", a: "Yes. For private entries, just provide a caption and a screenshot of your private post (screenshot optional) via the entry form. The #brightjulyAU hashtag is encouraged but not required." },
   { q: "Can I submit more than once?", a: "Yes. You're encouraged to submit a new entry each week of the campaign." },
   { q: "When are winners announced?", a: "Winners are announced on the Monday of the following week after each submission deadline." },
   { q: "Is there a cost to join?", a: "No. Bright July is free for every family, make your pledge, log your moments, and share if you like." },
-  { q: "What about photos of my children?", a: "Only share what you're comfortable with. See our Privacy Policy and Competition T&Cs for full details." },
+  { q: "What about photos of my children?", a: "Only share what you're comfortable with. See our Privacy Policy and Promotion Terms for full details." },
 ];
 
 // To embed ahead of release: schedule each episode as a YouTube Premiere, then paste its
@@ -102,8 +102,8 @@ const bigQuotes = [
 ];
 
 const socials = [
-  { Icon: "lucide:facebook", label: "Bright July on Facebook", href: "https://www.facebook.com/brightjuly" },
-  { Icon: "lucide:instagram", label: "Bright July on Instagram", href: "https://www.instagram.com/brightjuly" },
+  { Icon: "lucide:facebook", label: "Bright July on Facebook", href: "https://www.facebook.com/brightjulyAU" },
+  { Icon: "lucide:instagram", label: "Bright July on Instagram", href: "https://www.instagram.com/brightjulyAU" },
   {
     Icon: "lucide:mail",
     label: "Email Bright July",
@@ -129,9 +129,9 @@ const movementTiles = [social1, social5, social7];
         { label: "How It Works", href: "#how" },
         { label: "Outdoor Ideas", href: "#ideas" },
         { label: "Community", href: "#community" },
-        { label: "Competition", href: "/competition" },
+        { label: "Promotion", href: "/promotion" },
       ]}
-      cta={{ label: "Enter The Challenge", href: "/competition" }}
+      cta={{ label: "Enter The Challenge", href: "/promotion" }}
     />
 
     {/* Hero */}
@@ -165,7 +165,7 @@ const movementTiles = [social1, social5, social7];
             We're doing this during Australia's coldest month, a simple reminder to get outside, get moving and make memories together.
           </p>
           <div class="bj-fadeup d4 mt-10 flex flex-col sm:flex-row gap-3">
-            <a href="/competition" class="bj-btn-amber inline-flex items-center justify-center px-8 py-4 rounded-full text-base font-semibold tracking-wide" data-analytics="CTA Click" data-analytics-location="hero">
+            <a href="/promotion" class="bj-btn-amber inline-flex items-center justify-center px-8 py-4 rounded-full text-base font-semibold tracking-wide">
               Enter The Challenge
             </a>
             <a href="#how" class="inline-flex items-center justify-center px-8 py-4 rounded-full text-base font-semibold tracking-wide" style="color:#fff;border:1px solid rgba(255,255,255,0.5)">
@@ -226,8 +226,8 @@ const movementTiles = [social1, social5, social7];
         </div>
 
         <div class="mt-10 flex flex-col sm:flex-row gap-3">
-          <a href="/competition" class="bj-btn-amber inline-flex items-center justify-center gap-2 px-7 py-3.5 rounded-full text-sm font-semibold tracking-wide">
-            Enter The Challenge <Icon name="lucide:arrow-right" class="w-4 h-4" />
+          <a href="/promotion" class="bj-btn-amber inline-flex items-center justify-center gap-2 px-7 py-3.5 rounded-full text-sm font-semibold tracking-wide">
+            Enter The Challenge <Icon aria-hidden="true" name="lucide:arrow-right" class="w-4 h-4" />
           </a>
         </div>
       </div>
@@ -252,7 +252,7 @@ const movementTiles = [social1, social5, social7];
             </p>
 
             <div class="mt-10 flex flex-col sm:flex-row gap-3">
-              <a href="/competition" class="bj-btn-amber inline-flex items-center justify-center px-7 py-3.5 rounded-full text-sm font-semibold tracking-wide">
+              <a href="/promotion" class="bj-btn-amber inline-flex items-center justify-center px-7 py-3.5 rounded-full text-sm font-semibold tracking-wide">
                 Enter The Challenge
               </a>
               <a href="#community" class="inline-flex items-center justify-center px-7 py-3.5 rounded-full text-sm font-semibold tracking-wide bg-white" style="color:var(--color-charcoal);border:1px solid var(--color-line)">
@@ -281,7 +281,7 @@ const movementTiles = [social1, social5, social7];
                 <div class="bj-tile">
                   <Image src={img} alt="Family outdoor moment" loading="lazy" widths={[200, 400]} sizes="33vw" class="w-full h-full object-cover" />
                   <div class="absolute top-2 left-2 inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[10px] font-medium" style="background:rgba(255,255,255,0.92);color:var(--color-ink)">
-                    <Icon name="lucide:hash" class="w-3 h-3" style="color:var(--color-amber-deep)" /> BrightJuly
+                    <Icon aria-hidden="true" name="lucide:hash" class="w-3 h-3" style="color:var(--color-amber-deep)" /> BrightJuly
                   </div>
                 </div>
               ))}
@@ -304,8 +304,8 @@ const movementTiles = [social1, social5, social7];
             More daylight, better eyes, calmer evenings and memories your kids will carry for years, all from small outdoor moments woven into the everyday rhythm of July.
           </p>
           <p class="mt-5 flex items-start gap-2 text-sm md:text-base font-semibold" style="color:var(--color-amber-deep)">
-            <Icon name="lucide:hash" class="w-4 h-4 mt-1 shrink-0" />
-            <span>Share with #BrightJuly and tag @brightjulyAU to enter.</span>
+            <Icon aria-hidden="true" name="lucide:hash" class="w-4 h-4 mt-1 shrink-0" />
+            <span>Share with #brightjulyAU and tag @brightjulyAU to enter.</span>
           </p>
         </div>
 
@@ -322,13 +322,13 @@ const movementTiles = [social1, social5, social7];
                 <div class="flex items-start justify-between">
                   <span class="bj-step-num">{s.n}</span>
                   <span class="inline-flex items-center justify-center w-10 h-10 rounded-full" style="background:var(--color-amber-soft);color:var(--color-amber-deep)">
-                    <Icon name={s.icon} class="w-5 h-5" />
+                    <Icon aria-hidden="true" name={s.icon} class="w-5 h-5" />
                   </span>
                 </div>
                 <h3 class="mt-6 text-xl md:text-[1.4rem]">{s.title}</h3>
                 <p class="mt-3 text-sm leading-relaxed" style="color:var(--color-muted)">{s.d}</p>
                 <span class="bj-link-cta mt-5 inline-flex items-center gap-2 text-sm font-semibold" style="color:var(--color-amber-deep)">
-                  {s.cta} {s.href && <Icon name="lucide:arrow-right" class="w-4 h-4" />}
+                  {s.cta} {s.href && <Icon aria-hidden="true" name="lucide:arrow-right" class="w-4 h-4" />}
                 </span>
               </Tag>
             );
@@ -336,17 +336,17 @@ const movementTiles = [social1, social5, social7];
         </div>
 
         <div class="mt-10 flex flex-wrap items-center gap-x-7 gap-y-3 text-sm" style="color:var(--color-muted)">
-          <a href="/competition-terms" class="underline-offset-4 hover:underline">Competition T&amp;Cs</a>
+          <a href="/promotion-terms" class="underline-offset-4 hover:underline">Promotion T&amp;Cs</a>
           <a href="/privacy" class="underline-offset-4 hover:underline">Privacy Policy</a>
         </div>
 
         <div class="mt-10 max-w-3xl space-y-3">
-          <h3 class="text-xl md:text-2xl" style="color:var(--color-charcoal)">Competition FAQ</h3>
+          <h3 class="text-xl md:text-2xl" style="color:var(--color-charcoal)">Promotion FAQ</h3>
           {faqs.map((item) => (
             <details class="group rounded-2xl bg-white p-5 md:p-6" style="border:1px solid var(--color-line)">
               <summary class="flex items-center justify-between cursor-pointer list-none text-base md:text-lg font-semibold" style="color:var(--color-charcoal)">
                 {item.q}
-                <Icon name="lucide:chevron-down" class="w-5 h-5 transition-transform group-open:rotate-180" style="color:var(--color-amber-deep)" />
+                <Icon aria-hidden="true" name="lucide:chevron-down" class="w-5 h-5 transition-transform group-open:rotate-180" style="color:var(--color-amber-deep)" />
               </summary>
               <p class="mt-3 text-sm md:text-base leading-relaxed" style="color:var(--color-muted)">{item.a}</p>
             </details>
@@ -365,10 +365,10 @@ const movementTiles = [social1, social5, social7];
             <h2 class="text-4xl md:text-5xl leading-[1.05]">Win premium sunglasses,<br />every week of July.</h2>
             <p class="mt-6 text-base md:text-lg leading-[1.75]" style="color:var(--color-muted)">
               Two pairs of premium sunglasses are awarded each week for the most creative family
-              outdoor moments. Four weeks, eight pairs, plenty of reasons to get outside together.
+              outdoor moments. Five weeks, ten pairs, plenty of reasons to get outside together.
             </p>
-            <a href="/competition" class="bj-btn-amber mt-8 inline-flex items-center justify-center gap-2 px-7 py-3.5 rounded-full text-sm font-semibold tracking-wide" data-analytics="CTA Click" data-analytics-location="prize">
-              Enter The Challenge <Icon name="lucide:arrow-right" class="w-4 h-4" />
+            <a href="/promotion" class="bj-btn-amber mt-8 inline-flex items-center justify-center gap-2 px-7 py-3.5 rounded-full text-sm font-semibold tracking-wide">
+              Enter The Challenge <Icon aria-hidden="true" name="lucide:arrow-right" class="w-4 h-4" />
             </a>
           </div>
           <div class="grid gap-4 md:gap-5 bj-reveal">
@@ -412,7 +412,7 @@ const movementTiles = [social1, social5, social7];
         <div class="max-w-2xl bj-reveal">
           <span class="bj-eyebrow">Join The Movement Online</span>
           <div class="bj-rule mt-4 mb-7"></div>
-          <h2 class="text-4xl md:text-5xl leading-[1.05]">#BrightJuly</h2>
+          <h2 class="text-4xl md:text-5xl leading-[1.05]">#brightjulyAU</h2>
           <p class="mt-6 text-base md:text-lg leading-[1.75]" style="color:var(--color-ink)">
             Bright July lives in your feed, your podcast app and your group chat, wherever your
             family already gathers online.
@@ -429,7 +429,7 @@ const movementTiles = [social1, social5, social7];
               <Image src={img} alt="Family outdoor moment" loading="lazy" widths={[300, 600]} sizes="(min-width: 768px) 25vw, 50vw" class="w-full h-full object-cover" />
               <div class="absolute inset-0" style="background:linear-gradient(180deg, rgba(0,0,0,0) 55%, rgba(0,0,0,0.35) 100%)"></div>
               <div class="absolute top-3 left-3 inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[10px] font-medium" style="background:rgba(255,255,255,0.92);color:var(--color-ink)">
-                <Icon name="lucide:hash" class="w-3 h-3" style="color:var(--color-amber-deep)" /> BrightJuly
+                <Icon aria-hidden="true" name="lucide:hash" class="w-3 h-3" style="color:var(--color-amber-deep)" /> BrightJuly
               </div>
             </div>
           ))}
@@ -437,12 +437,12 @@ const movementTiles = [social1, social5, social7];
 
         <div class="mt-12 flex flex-wrap items-center gap-4">
           <div class="inline-flex items-center gap-3 px-5 py-3 rounded-full" style="background:#fff;border:1px solid var(--color-line)">
-            <Icon name="lucide:hash" class="w-4 h-4" style="color:var(--color-amber-deep)" />
+            <Icon aria-hidden="true" name="lucide:hash" class="w-4 h-4" style="color:var(--color-amber-deep)" />
             <span class="serif text-xl" style="color:var(--color-charcoal)">BrightJuly</span>
             <span class="text-xs" style="color:var(--color-muted)">· one photo, one sentence, one shared tag</span>
           </div>
-          <a href="/competition" class="bj-btn-amber inline-flex items-center justify-center gap-2 px-7 py-3.5 rounded-full text-sm font-semibold tracking-wide">
-            Join The Movement <Icon name="lucide:arrow-right" class="w-4 h-4" />
+          <a href="/promotion" class="bj-btn-amber inline-flex items-center justify-center gap-2 px-7 py-3.5 rounded-full text-sm font-semibold tracking-wide">
+            Join The Movement <Icon aria-hidden="true" name="lucide:arrow-right" class="w-4 h-4" />
           </a>
         </div>
       </div>
@@ -471,7 +471,7 @@ const movementTiles = [social1, social5, social7];
               </div>
               <div class="p-6 md:p-7 flex flex-col flex-1">
                 <span class="inline-flex self-start items-center gap-2 px-2.5 py-1 rounded-full text-[10px] font-semibold tracking-wider uppercase" style="background:var(--color-teal-pale);color:var(--color-teal-deep)">
-                  <Icon name={card.icon} class="w-3 h-3" /> {card.tag}
+                  <Icon aria-hidden="true" name={card.icon} class="w-3 h-3" /> {card.tag}
                 </span>
                 <h3 class="mt-4 text-xl leading-snug">{card.title}</h3>
                 <p class="mt-3 text-sm leading-relaxed" style="color:var(--color-muted)">{card.d}</p>
@@ -481,7 +481,7 @@ const movementTiles = [social1, social5, social7];
         </div>
 
         <div class="mt-12 flex flex-col items-center gap-6">
-          <a href="/competition" class="bj-btn-amber inline-flex items-center justify-center gap-2 px-7 py-3.5 rounded-full text-sm font-semibold tracking-wide">
+          <a href="/promotion" class="bj-btn-amber inline-flex items-center justify-center gap-2 px-7 py-3.5 rounded-full text-sm font-semibold tracking-wide">
             Share Your Outdoor Moment
           </a>
         </div>
@@ -508,7 +508,7 @@ const movementTiles = [social1, social5, social7];
             </blockquote>
             <figcaption class="mt-8 flex items-center gap-4">
               <span class="w-10 h-10 rounded-full inline-flex items-center justify-center" style="background:var(--color-amber-soft);color:var(--color-amber-deep)">
-                <Icon name="lucide:heart" class="w-4 h-4" />
+                <Icon aria-hidden="true" name="lucide:heart" class="w-4 h-4" />
               </span>
               <span class="text-xs tracking-[0.18em] uppercase" style="color:var(--color-muted)">John · Dad Of Two · Sydney</span>
             </figcaption>
@@ -525,7 +525,7 @@ const movementTiles = [social1, social5, social7];
         </div>
 
         <div class="mt-14 flex flex-col items-center gap-3">
-          <a href="/competition" class="bj-btn-amber inline-flex items-center justify-center gap-2 px-7 py-3.5 rounded-full text-sm font-semibold tracking-wide">
+          <a href="/promotion" class="bj-btn-amber inline-flex items-center justify-center gap-2 px-7 py-3.5 rounded-full text-sm font-semibold tracking-wide">
             Enter The Challenge
           </a>
         </div>
@@ -551,7 +551,7 @@ const movementTiles = [social1, social5, social7];
             </div>
           </div>
           <div class="md:col-span-8">
-            <Icon name="lucide:sparkles" class="w-6 h-6" style="color:var(--color-amber-deep)" />
+            <Icon aria-hidden="true" name="lucide:sparkles" class="w-6 h-6" style="color:var(--color-amber-deep)" />
             <h2 class="mt-5 text-3xl md:text-5xl leading-[1.08]">
               A note from the family<br />who started this.
             </h2>
@@ -580,19 +580,19 @@ const movementTiles = [social1, social5, social7];
     <section class="relative overflow-hidden">
       <div class="absolute inset-0">
         <Image src={closing} alt="Families silhouetted at sunset in an open meadow" loading="lazy" widths={[768, 1280, 1920]} sizes="100vw" class="w-full h-full object-cover object-[62%_42%] md:object-center" />
-        <div class="absolute inset-0" style="background:linear-gradient(180deg, rgba(31,27,22,0.15) 0%, rgba(31,27,22,0.35) 100%)"></div>
+        <div class="absolute inset-0" style="background:linear-gradient(180deg, rgba(20,16,12,0.5) 0%, rgba(20,16,12,0.52) 45%, rgba(20,16,12,0.72) 100%)"></div>
       </div>
       <div class="relative z-10 max-w-5xl mx-auto px-6 md:px-10 py-32 md:py-44 text-center">
-        <Icon name="lucide:sun" class="w-7 h-7 mx-auto" style="color:var(--color-amber)" />
-        <h2 class="serif text-5xl md:text-7xl leading-[1.02] text-white mt-8">
+        <Icon aria-hidden="true" name="lucide:sun" class="w-7 h-7 mx-auto" style="color:var(--color-amber);filter:drop-shadow(0 2px 6px rgba(0,0,0,0.5))" />
+        <h2 class="serif text-5xl md:text-7xl leading-[1.02] mt-8" style="color:#ffffff;text-shadow:0 1px 2px rgba(0,0,0,0.55), 0 2px 10px rgba(0,0,0,0.6), 0 8px 30px rgba(0,0,0,0.5)">
           Build a brighter<br />outdoor habit, together.
         </h2>
-        <p class="mt-7 max-w-xl mx-auto text-white/85 text-base md:text-lg leading-relaxed">
+        <p class="mt-7 max-w-xl mx-auto text-white text-base md:text-lg leading-relaxed" style="text-shadow:0 1px 2px rgba(0,0,0,0.55), 0 2px 10px rgba(0,0,0,0.6)">
           Join Australian families turning outdoor light into a simple, shared family ritual
           this July.
         </p>
         <div class="mt-10 flex flex-col sm:flex-row items-center justify-center gap-3">
-          <a href="/competition" class="bj-btn-amber inline-flex items-center justify-center px-8 py-4 rounded-full text-sm font-medium tracking-wide" data-analytics="CTA Click" data-analytics-location="closing">
+          <a href="/promotion" class="bj-btn-amber inline-flex items-center justify-center px-8 py-4 rounded-full text-sm font-medium tracking-wide">
             Enter The Challenge
           </a>
           <a href="#how" class="inline-flex items-center justify-center px-8 py-4 rounded-full text-sm font-medium tracking-wide" style="color:#fff;border:1px solid rgba(255,255,255,0.4)">
@@ -607,7 +607,7 @@ const movementTiles = [social1, social5, social7];
       <div class="max-w-5xl mx-auto px-6 md:px-10">
         <div class="flex flex-col md:flex-row items-center justify-between gap-5">
           <div class="flex items-center gap-3 text-center md:text-left">
-            <Icon name="lucide:share-2" class="w-5 h-5" style="color:var(--color-amber-deep)" />
+            <Icon aria-hidden="true" name="lucide:share-2" class="w-5 h-5" style="color:var(--color-amber-deep)" />
             <div>
               <div class="serif text-xl md:text-2xl" style="color:var(--color-charcoal)">Spread the brightness</div>
               <div class="text-sm" style="color:var(--color-muted)">Help another family join the movement this July.</div>
@@ -616,7 +616,7 @@ const movementTiles = [social1, social5, social7];
           <div class="flex items-center gap-2">
             {socials.map((s) => (
               <a href={s.href} target="_blank" rel="noopener noreferrer" aria-label={s.label} class="w-11 h-11 rounded-full inline-flex items-center justify-center bg-white hover:-translate-y-0.5 transition-transform" style="border:1px solid var(--color-line);color:var(--color-charcoal)">
-                <Icon name={s.Icon} class="w-4 h-4" />
+                <Icon aria-hidden="true" name={s.Icon} class="w-4 h-4" />
               </a>
             ))}
           </div>
@@ -635,7 +635,7 @@ const movementTiles = [social1, social5, social7];
           <span class="text-xs tracking-[0.22em] uppercase">A Family Outdoor Movement</span>
         </div>
         <div class="flex items-center gap-6 text-xs">
-          <a href="/competition-terms" class="hover:text-white">Competition Terms</a>
+          <a href="/promotion-terms" class="hover:text-white">Promotion Terms</a>
           <a href="/privacy" class="hover:text-white">Privacy Policy</a>
           <a href="/terms" class="hover:text-white">Website Terms</a>
         </div>

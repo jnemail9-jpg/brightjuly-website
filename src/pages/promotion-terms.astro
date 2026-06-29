@@ -1,0 +1,271 @@
+---
+import { Icon } from "astro-icon/components";
+import Layout from "../layouts/Layout.astro";
+
+const entrySteps = [
+  { n: "01", icon: "lucide:user-plus", title: "Register", d: "Sign up on the website with your full name, residential address, email address and contact telephone number." },
+  { n: "02", icon: "lucide:camera", title: "Submit A Photo", d: "Upload one (1) photograph taken outdoors during the entry period." },
+  { n: "03", icon: "lucide:pen-line", title: "Write 25 Words", d: "Add a written response of 25 words or less describing your outdoor experience." },
+  { n: "04", icon: "lucide:repeat", title: "Enter Each Week", d: "One entry per person per weekly draw period — submit a new entry each week for another chance to win." },
+];
+
+const faqs = [
+  { q: "When does it run?", a: "The Entry Period runs from 12:01am AEST on 1 July 2026 to 11:59pm AEST on 3 August 2026. It is divided into weekly draw periods, each running Monday 12:01am to Sunday 11:59pm AEST." },
+  { q: "Who can enter?", a: "Entry is open to Australian residents aged 18 years or over." },
+  { q: "How do I enter?", a: "Register on the website with your full name, residential address, email address and contact telephone number, then submit one outdoor photograph and a written response of 25 words or less describing your outdoor experience." },
+  { q: "How many times can I enter?", a: "One entry per person per weekly draw period. You're welcome to enter again with a new entry in each weekly draw period." },
+  { q: "What can I win?", a: "Two pairs of Ray-Ban sunglasses (RRP up to $126 each) are available to be won each week — one for the photo category and one for the written category. A maximum of 10 pairs are available across the entire promotion." },
+  { q: "How are winners selected?", a: "Two winners are selected each weekly draw period by the Promoter's judging panel: one photo entry and one written entry, judged on creativity, originality and relevance to the theme of outdoor activity and the benefits of outdoor time." },
+  { q: "When are winners notified?", a: "Winners are notified by email and phone no later than 5 business days after the close of the relevant weekly draw period, and must claim their prize within 14 days of being notified." },
+  { q: "Is there a cost?", a: "No. Bright July is free to enter." },
+];
+
+const keyTerms = [
+  { term: "Promotion", detail: "Bright July Campaign." },
+  { term: "Promoter", detail: "Luxi Health Pty Ltd (ABN 60 689 732 910), Suite 804, 97 Pacific Hwy, North Sydney, New South Wales, 2060, Australia. hello@brightjuly.com.au · brightjuly.com.au" },
+  { term: "Entry Period", detail: "Starts 12:01am AEST 1 July 2026 and ends 11:59pm AEST 3 August 2026 (the Campaign Period). The Promotion is divided into weekly draw periods, each commencing on Monday at 12:01am AEST and closing on Sunday at 11:59pm AEST (each a Weekly Draw Period). The Promoter will publish the dates of each Weekly Draw Period on the Website." },
+  { term: "Prize", detail: "Two (2) pairs of Ray-Ban sunglasses (RRP up to $126 each) are available to be won each week during the Entry Period. A maximum of 10 pairs of sunglasses are available across the entire Promotion." },
+  { term: "Entrants", detail: "Entry is open to Australian residents aged 18 years or over (Entrants)." },
+  { term: "Entry Procedure", detail: "To enter, Entrants must during the Entry Period: register on the Website by providing their full name, residential address, email address, and contact telephone number; submit one (1) photograph taken outdoors; and submit a written response of 25 words or less describing their outdoor experience." },
+  { term: "Maximum Number of Entries", detail: "One (1) entry per person per Weekly Draw Period. Entrants may enter each Weekly Draw Period during the Promotion, subject to submitting a new entry in each Weekly Draw Period." },
+  { term: "Selection Details", detail: "Two (2) Winners will be selected per Weekly Draw Period by the Promoter's judging panel. Category 1 — Photo Entry: the winning photograph is selected on creativity and originality, and relevance to the theme of outdoor activity. Category 2 — Written Entry: the winning 25-word response is selected on creativity and originality, and relevance to the theme of the benefits of outdoor time." },
+  { term: "Notification of Winners", detail: "Winners will be notified via email and phone no later than 5 business days from the close of the relevant Weekly Draw Period." },
+  { term: "Redemption Date", detail: "Winners must claim their Prize within 14 days of being notified of their win, failing which the Prize will be deemed forfeited." },
+  { term: "Privacy Policy", detail: "brightjuly.com.au/privacy" },
+  { term: "Website", detail: "Means the website on which the Promotion is available for entry." },
+];
+
+const clauseGroups = [
+  {
+    t: "Terms & Conditions",
+    items: [
+      "The Key Terms and these terms and conditions (together the Terms) make up the rules for an Entrant's participation in the Promotion. By participating, the Entrant accepts these Terms.",
+      "To enter the Promotion, Entrants must complete the Entry Procedure during the Entry Period.",
+      "Entrants may enter the Promotion up to the Maximum Number of Entries.",
+      "Entries are deemed to be received at the time of receipt by the Promoter not at the time of transmission by the Entrant.",
+      "Using automated entry software or any other means to automatically enter the Promotion multiple times is not allowed. If an Entrant does this, all of their entries will be invalid.",
+      "Incomplete or ineligible entries, as well as entries that breach these Terms or any other content guidelines set by the Promoter, will not be valid. The Promoter reserves the right, at any time, to verify the validity of entries and Entrants (including an Entrant's identity, age and place of residence) and to disqualify any Entrant or Winner.",
+      "By entering the Promotion, each Entrant warrants that they are an Australian resident aged 18 years or over. Entries submitted by persons under the age of 18 will be invalid and any personal information collected will be deleted.",
+      "If a dispute arises as to the identity of an online Entrant, the entry will be deemed to have been submitted by the authorised account holder of the email address. The Promoter may ask any Entrant to provide the Promoter with proof that they are the authorised account holder of the email address associated with the entry.",
+    ],
+  },
+  {
+    t: "Winner Selection",
+    items: [
+      "The winning Entrant (Winner) for the Promotion will be determined in accordance with the Selection Details and the Winner notified as set out in the Key Terms.",
+      "An Entrant who wins one category of the Promotion is not eligible to win any other category. Each Winner may only win one Prize.",
+      "Entrants are responsible for all expenses incurred when entering the Promotion and accessing, claiming and/or using the Prize (unless otherwise stated on the Website).",
+      "The Promoter's decision is final and the Promoter will not enter into correspondence with Entrants regarding the decision.",
+      "If a Winner's entry is found to be invalid, the Promoter may reselect or decide on another winning entry.",
+    ],
+  },
+  {
+    t: "Prizes",
+    items: [
+      "The Prize(s) are specified in the Key Terms. THE PRIZE IS NOT TRANSFERRABLE AND NOT REDEEMABLE FOR CASH unless otherwise specified in these Terms.",
+      "If any Prize is unavailable and the Promoter has used all reasonable efforts to arrange the Prize, the Promoter reserves the right to substitute the Prize with a prize of equal value and/or specification, subject to any written directions from a regulatory authority.",
+    ],
+  },
+  {
+    t: "Claiming Prizes",
+    items: [
+      "The Prize(s) must be claimed by the Redemption Date in accordance with any claim instructions set out in the Key Terms, or it will be deemed forfeited by the Winner. The Promoter may select an alternative Winner in its absolute discretion.",
+      "Prizes will be delivered directly by the Prize supplier to the Winner's nominated Australian address within approximately 30 days of the Winner being notified. The Promoter is not responsible for any delay, loss or damage caused by the Prize supplier or circumstances outside the Promoter's control.",
+    ],
+  },
+  {
+    t: "Winner Consent",
+    lead: "By entering the Promotion, each Entrant agrees that, if selected as a Winner:",
+    items: [
+      "their first name and suburb may be shared with other Entrants and the public via email announcement; and",
+      "their name, image, and/or submitted Content may be tagged or featured in the Bright July Weekly Winners post on the Promoter's social media channels.",
+      "Winners who do not wish to be identified publicly must notify the Promoter within 5 business days of being notified of their win.",
+    ],
+  },
+];
+
+const generalItems = [
+  { label: "Personal information", text: "The Promoter collects personal information from all Entrants in order to conduct the Promotion and may, for this purpose, collect, use and disclose such information to third parties, including to agents, contractors, service providers, Prize suppliers and as required, to regulatory authorities. Where an Entrant has opted in to receive marketing communications from named sponsors and related not-for-profit partners, the Promoter may also share their contact details for marketing purposes. Please see the Promoter's Privacy Policy (linked in the Key Terms) and any privacy collection notice provided, for more information about how the Promoter handles your personal information. By providing personal information to the Promoter, the Entrant agrees to the collection, use, storage and disclosure of that information as described in this clause and the Promoter's Privacy Policy." },
+  { label: "Non-Excludable Guarantees", text: "Nothing in these Terms limits, excludes or modifies or purports to limit, exclude or modify any legislation which cannot lawfully be excluded or limited, including the statutory consumer guarantees as provided under the Competition and Consumer Act 2010 (Cth) or any other applicable State or Territory legislation (Non-Excludable Guarantees)." },
+  { label: "Consequential Loss", text: "Despite anything to the contrary, but subject to the Non-Excludable Guarantees, neither party will be liable under these Terms for any consequential, special or indirect loss including loss of profit (including anticipated profit), loss of benefit (including anticipated benefit), loss of revenue, loss of business, loss of goodwill, loss of opportunity, loss of savings (including anticipated savings), loss of reputation, loss of use (including both real and anticipatory) and/or loss or corruption of data, whether under statute, contract, equity, tort (including negligence), indemnity or otherwise." },
+  { label: "Force Majeure", text: "The Promoter will not be liable for any delay or failure to perform its obligations under these Terms if such delay or failure is caused or contributed to by a Force Majeure Event. Force Majeure Event means any event or circumstance which is beyond the Promoter's reasonable control including, acts of God including fire, hurricane, typhoon, earthquake, landslide, tsunami, mudslide or other catastrophic natural disaster, civil riot, civil rebellion, revolution, terrorism, insurrection, militarily usurped power, act of sabotage, act of a public enemy, war (whether declared or not) or other like hostilities, ionising radiation, contamination by radioactivity, nuclear, chemical or biological contamination, any widespread illness, quarantine or government sanctioned ordinance or shutdown, pandemic (including COVID-19 and any variations or mutations to this disease or illness) or epidemic." },
+  { label: "Social Media", text: "The use of social media is subject to the prevailing terms and conditions of use of the social media platform. Unless otherwise indicated in these Terms, the Promotion is in no way sponsored, endorsed or administered by, or associated with any social media platform. If an Entrant uses social media to participate in the Promotion, the Entrant understands that they are providing their information to the Promoter and not to any social media platform. Entrants are solely responsible and liable for the content of their entries and any other information they transmit to other Internet users. By participating in the Promotion, the Entrant releases the applicable social media site from all claims, liabilities, suits, actions and expenses, including costs of litigation and reasonable legal costs associated with the Promotion." },
+  { label: "Currency", text: "Unless expressly stated otherwise, a reference in these terms or in any advertisement relating to the Promotion, to Australian dollars, dollars, AUD$ or $ is a reference to the lawful currency of Australia." },
+  { label: "Amendments", text: "If for any reason any aspect of this Promotion is not capable of running as planned, the Promoter may in its sole discretion cancel, terminate, modify or suspend the Promotion and invalidate any affected entries, or suspend or modify a prize, subject to State or Territory regulation." },
+  { label: "Jurisdiction", text: "These Terms are governed by the laws of New South Wales. Entrants submit to the jurisdiction of the courts of New South Wales." },
+  { label: "Dispute Resolution", text: "In the event of a dispute, Entrants must contact the Promoter and attempt to resolve the dispute in good faith." },
+];
+
+const ipLead = "Intellectual property rights: Where the Promotion involves submission of any materials including answers to questions, a statement, idea or opinion, video or voice recordings, images, works of art, designs or photographs (Content), all Entrants represent, warrant and agree that:";
+const ipWarranties = [
+  "the Content must not contain any viruses or cause or be likely to cause any injury or harm to any person or entity;",
+  "the Content must be the work of the individual submitting it;",
+  "the Content must not have been published elsewhere or have won a prize in any other competition or promotion;",
+  "Entrants have obtained all appropriate consents and/or permission relating to a person who appears in, or whose property appears in, the Content;",
+  "the submission of the Content does not infringe the intellectual property rights of any third party and that the Content they are submitting is their own work and that they own the copyright for it;",
+  "the Promoter may remove or decline to publish any Content without notice to the relevant Entrant;",
+  "the Entrant grants the Promoter an irrevocable, perpetual, royalty-free, worldwide, sublicensable and transferable licence to publish, reproduce, distribute, publicly display, and create derivative works of, copy, modify and exploit the Content in any media now known or in the future devised, for any purpose whatsoever, including advertising, marketing, and promotional purposes, without compensation or notification to you. The Entrant waives all moral rights in the Content to the fullest extent permitted by law;",
+  "the Promoter may use their likeness, image and/or voice in the event that the Entrant is the Winner (including photograph, film or recording) in any media whatsoever throughout the world for the purpose of promoting this Promotion or other similar promotions. The Entrant will not be entitled to any remuneration for such use; and",
+  "Content must not feature any person under the age of 18 unless the Entrant is the parent or legal guardian of that person and has obtained all necessary consents for the child's image to be submitted and published. By submitting Content featuring a person under the age of 18, the Entrant warrants that they are the parent or legal guardian of that person and consents to the use of that person's image in accordance with these Terms.",
+];
+---
+
+<Layout
+  title="How Bright July Works | Promotion Details & T&Cs"
+  description="Full details on how the Bright July family outdoor light promotion works, eligibility, prizes, and Promotion Terms & Conditions."
+  canonical="/promotion-terms"
+>
+  <div class="bj-page">
+    {/* Header */}
+    <header class="border-b" style="border-color:var(--color-line);background:rgba(250,246,239,0.92);backdrop-filter:blur(10px)">
+      <div class="max-w-7xl mx-auto px-6 md:px-10 h-16 flex items-center justify-between">
+        <a href="/" class="flex items-center gap-2 text-sm tracking-wide" style="color:var(--color-charcoal)">
+          <Icon aria-hidden="true" name="lucide:sun" class="w-4 h-4" style="color:var(--color-amber-deep)" />
+          <span class="serif text-lg">Bright July</span>
+        </a>
+        <a href="/" class="inline-flex items-center gap-2 text-xs tracking-widest uppercase" style="color:var(--color-muted)">
+          <Icon aria-hidden="true" name="lucide:arrow-left" class="w-3.5 h-3.5" /> Back Home
+        </a>
+      </div>
+    </header>
+
+    {/* Hero */}
+    <section class="py-20 md:py-28">
+      <div class="max-w-4xl mx-auto px-6 md:px-10">
+        <span class="bj-eyebrow" style="color:var(--color-amber-deep)">The Full Story</span>
+        <div class="bj-rule mt-4 mb-7" style="background:var(--color-amber-deep);width:48px;opacity:1"></div>
+        <h1 class="text-5xl md:text-6xl leading-[1.04]">How Bright July<br />Works.</h1>
+        <p class="mt-7 text-base md:text-lg leading-[1.75] max-w-2xl" style="color:var(--color-ink)">
+          A simple, month-long invitation for families to spend more bright moments outdoors,
+          together. Below is the full picture: how to enter, eligibility, prizes, and the complete
+          Promotion Terms &amp; Conditions.
+        </p>
+      </div>
+    </section>
+
+    {/* Steps */}
+    <section class="py-16 md:py-24" style="background:var(--color-cream-soft)">
+      <div class="max-w-6xl mx-auto px-6 md:px-10">
+        <span class="bj-eyebrow" style="color:var(--color-amber-deep)">How To Enter</span>
+        <div class="bj-rule mt-4 mb-7" style="background:var(--color-amber-deep);width:48px;opacity:1"></div>
+        <h2 class="text-4xl md:text-5xl leading-[1.05]">From Sign-Up<br />To Submission.</h2>
+
+        <ol class="mt-14 space-y-5">
+          {entrySteps.map((s) => (
+            <li class="rounded-[20px] p-6 md:p-8 flex items-start gap-6 bg-white" style="border:1px solid var(--color-line)">
+              <span class="serif text-3xl md:text-4xl shrink-0" style="color:var(--color-amber-deep)">{s.n}</span>
+              <span class="inline-flex items-center justify-center w-11 h-11 rounded-full shrink-0" style="background:var(--color-amber-soft);color:var(--color-amber-deep)">
+                <Icon aria-hidden="true" name={s.icon} class="w-5 h-5" />
+              </span>
+              <div>
+                <h3 class="text-xl md:text-2xl">{s.title}</h3>
+                <p class="mt-2 text-sm md:text-base leading-relaxed" style="color:var(--color-muted)">{s.d}</p>
+              </div>
+            </li>
+          ))}
+        </ol>
+      </div>
+    </section>
+
+    {/* FAQ */}
+    <section class="py-20 md:py-28">
+      <div class="max-w-4xl mx-auto px-6 md:px-10">
+        <span class="bj-eyebrow" style="color:var(--color-amber-deep)">Common Questions</span>
+        <div class="bj-rule mt-4 mb-7" style="background:var(--color-amber-deep);width:48px;opacity:1"></div>
+        <h2 class="text-4xl md:text-5xl leading-[1.05]">Good To Know.</h2>
+        <div class="mt-12">
+          {faqs.map((f) => (
+            <div class="py-7" style="border-top:1px solid var(--color-line)">
+              <h3 class="text-lg md:text-xl">{f.q}</h3>
+              <p class="mt-3 text-sm md:text-base leading-relaxed" style="color:var(--color-muted)">{f.a}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    {/* Promotion Terms */}
+    <section id="terms" class="py-20 md:py-28" style="background:var(--color-cream)">
+      <div class="max-w-4xl mx-auto px-6 md:px-10">
+        <div class="flex items-center gap-3">
+          <Icon aria-hidden="true" name="lucide:shield-check" class="w-5 h-5" style="color:var(--color-amber-deep)" />
+          <span class="bj-eyebrow" style="color:var(--color-amber-deep)">Terms &amp; Conditions</span>
+        </div>
+        <div class="bj-rule mt-4 mb-7" style="background:var(--color-amber-deep);width:48px;opacity:1"></div>
+        <h2 class="text-4xl md:text-5xl leading-[1.05]">Promotion Terms<br />&amp; Conditions.</h2>
+
+        {/* Key Terms */}
+        <h3 class="mt-14 text-2xl md:text-3xl">Key Terms</h3>
+        <dl class="mt-6 rounded-[20px] bg-white divide-y" style="border:1px solid var(--color-line);border-color:var(--color-line)">
+          {keyTerms.map((k) => (
+            <div class="grid md:grid-cols-[200px_1fr] gap-2 md:gap-6 p-5 md:p-6" style="border-color:var(--color-line)">
+              <dt class="font-semibold" style="color:var(--color-charcoal)">{k.term}</dt>
+              <dd class="text-sm md:text-base leading-relaxed" style="color:var(--color-muted)">{k.detail}</dd>
+            </div>
+          ))}
+        </dl>
+
+        {/* Clause groups */}
+        <div class="mt-12 space-y-10 text-base leading-[1.85]" style="color:var(--color-ink)">
+          {clauseGroups.map((group) => (
+            <div>
+              <h3 class="text-2xl mb-3">{group.t}</h3>
+              {group.lead && <p class="mb-3" style="color:var(--color-muted)">{group.lead}</p>}
+              <ul class="list-disc pl-5 space-y-3" style="color:var(--color-muted)">
+                {group.items.map((item) => (
+                  <li>{item}</li>
+                ))}
+              </ul>
+            </div>
+          ))}
+
+          {/* General */}
+          <div>
+            <h3 class="text-2xl mb-3">General</h3>
+            <ul class="space-y-4" style="color:var(--color-muted)">
+              {generalItems.map((g) => (
+                <li>
+                  <span class="font-semibold" style="color:var(--color-charcoal)">{g.label}:</span> {g.text}
+                </li>
+              ))}
+              <li>
+                <span class="font-semibold" style="color:var(--color-charcoal)">{ipLead}</span>
+                <ul class="list-disc pl-5 mt-3 space-y-3">
+                  {ipWarranties.map((w) => (
+                    <li>{w}</li>
+                  ))}
+                </ul>
+              </li>
+            </ul>
+          </div>
+
+          {/* Privacy */}
+          <div>
+            <h3 class="text-2xl mb-3">Privacy</h3>
+            <p style="color:var(--color-muted)">
+              Personal information is handled in line with our <a href="/privacy" class="underline" style="color:var(--color-amber-deep)">Privacy Policy</a>.
+            </p>
+          </div>
+        </div>
+
+        <p class="mt-12 text-sm" style="color:var(--color-muted)">© LegalVision ILP Pty Ltd</p>
+      </div>
+    </section>
+
+    {/* CTA */}
+    <section class="py-20 md:py-28" style="background:var(--color-cream-soft)">
+      <div class="max-w-3xl mx-auto px-6 md:px-10 text-center">
+        <Icon aria-hidden="true" name="lucide:sparkles" class="w-6 h-6 mx-auto" style="color:var(--color-amber-deep)" />
+        <h2 class="mt-6 text-4xl md:text-5xl leading-[1.05]">Ready When You Are.</h2>
+        <div class="mt-10 flex flex-col sm:flex-row items-center justify-center gap-3">
+          <a href="/promotion" class="bj-btn-amber inline-flex items-center justify-center px-8 py-4 rounded-full text-sm font-medium tracking-wide">
+            Join Bright July
+          </a>
+          <a href="/" class="inline-flex items-center justify-center px-8 py-4 rounded-full text-sm font-medium tracking-wide bg-white" style="color:var(--color-charcoal);border:1px solid var(--color-line)">
+            Back To Homepage
+          </a>
+        </div>
+      </div>
+    </section>
+  </div>
+</Layout>

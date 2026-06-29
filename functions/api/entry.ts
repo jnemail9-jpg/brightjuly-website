@@ -1,6 +1,6 @@
 /// <reference types="@cloudflare/workers-types" />
 //
-// POST /api/entry, competition entry endpoint (Cloudflare Pages Function).
+// POST /api/entry, promotion entry endpoint (Cloudflare Pages Function).
 //
 // Flow: verify Turnstile → validate → insert into D1 (critical) →
 // send Brevo confirmation email + upsert contact (best-effort, background) → redirect.
@@ -126,7 +126,7 @@ async function sendConfirmationEmail(env: Env, e: Entry): Promise<void> {
       <h1 style="font-size:24px;color:#1F1B16;margin:0 0 16px">Thanks for entering Bright July, ${firstName}!</h1>
       <p style="font-size:15px;line-height:1.6;margin:0 0 12px">We've received your entry for squad <strong>${e.squad_name}</strong>.</p>
       <p style="font-size:15px;line-height:1.6;margin:0 0 12px">Keep getting outdoors and come back next week with another moment, winners are announced each Monday during July.</p>
-      <p style="font-size:15px;line-height:1.6;margin:0 0 12px">Share your outdoor moment with <strong>#BrightJuly</strong> and tag <strong>@BrightJuly</strong>.</p>
+      <p style="font-size:15px;line-height:1.6;margin:0 0 12px">Share your outdoor moment with <strong>#brightjulyAU</strong> and tag <strong>@brightjulyAU</strong>.</p>
       <p style="font-size:14px;color:#6E6357;margin:24px 0 0">The Bright July team</p>
     </div></body></html>`,
       };
@@ -180,31 +180,31 @@ export const onRequestPost: PagesFunction<Env> = async (context) => {
   try {
     form = await request.formData();
   } catch {
-    return redirect(request, "/competition?error=invalid#entry");
+    return redirect(request, "/promotion?error=invalid#entry");
   }
 
   // 1. Turnstile
   const token = String(form.get("cf-turnstile-response") ?? "");
-  if (!token) return redirect(request, "/competition?error=verification#entry");
+  if (!token) return redirect(request, "/promotion?error=verification#entry");
   const secret = env.TURNSTILE_SECRET_KEY ?? TURNSTILE_TEST_SECRET;
   if (!env.TURNSTILE_SECRET_KEY) {
     console.warn("TURNSTILE_SECRET_KEY not set, using test secret (dev only).");
   }
   const ip = request.headers.get("CF-Connecting-IP");
   if (!(await verifyTurnstile(token, secret, ip))) {
-    return redirect(request, "/competition?error=verification#entry");
+    return redirect(request, "/promotion?error=verification#entry");
   }
 
   // 2. Validate
   for (const field of REQUIRED_FIELDS) {
     const value = form.get(field);
     if (value === null || String(value).trim() === "") {
-      return redirect(request, "/competition?error=fields#entry");
+      return redirect(request, "/promotion?error=fields#entry");
     }
   }
   const email = String(form.get("email")).trim();
   if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)) {
-    return redirect(request, "/competition?error=email#entry");
+    return redirect(request, "/promotion?error=email#entry");
   }
 
   const str = (k: string) => {
@@ -218,10 +218,10 @@ export const onRequestPost: PagesFunction<Env> = async (context) => {
   const photo = form.get("photo");
   if (photo instanceof File && photo.size > 0) {
     if (!(photo.type in PHOTO_EXT)) {
-      return redirect(request, "/competition?error=phototype#entry");
+      return redirect(request, "/promotion?error=phototype#entry");
     }
     if (photo.size > MAX_PHOTO_BYTES) {
-      return redirect(request, "/competition?error=photosize#entry");
+      return redirect(request, "/promotion?error=photosize#entry");
     }
     try {
       photoKey = await uploadPhoto(env, photo, id);
@@ -258,7 +258,7 @@ export const onRequestPost: PagesFunction<Env> = async (context) => {
     await insertEntry(env.DB, entry);
   } catch (err) {
     console.error("D1 insert failed:", err);
-    return redirect(request, "/competition?error=server#entry");
+    return redirect(request, "/promotion?error=server#entry");
   }
 
   // 5. Brevo email + contact (best-effort, in the background, never blocks the entrant).
@@ -276,5 +276,5 @@ export const onRequestPost: PagesFunction<Env> = async (context) => {
     console.warn("BREVO_API_KEY not set, skipping confirmation email/contact (dev).");
   }
 
-  return redirect(request, "/competition/success");
+  return redirect(request, "/promotion/success");
 };

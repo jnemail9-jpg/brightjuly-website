@@ -3,6 +3,7 @@ import { defineConfig } from "astro/config";
 import sitemap from "@astrojs/sitemap";
 import icon from "astro-icon";
 import tailwindcss from "@tailwindcss/vite";
+import { buildEmails } from "./scripts/build-emails.mjs";
 
 // https://astro.build/config
 export default defineConfig({
@@ -19,6 +20,15 @@ export default defineConfig({
       filter: (page) => !page.includes("/promotion/success"),
     }),
     icon(),
+    // Compile MJML email templates → functions/api/_emails.generated.ts before each build.
+    {
+      name: "build-emails",
+      hooks: {
+        "astro:build:start": async () => {
+          await buildEmails();
+        },
+      },
+    },
   ],
   vite: {
     plugins: [tailwindcss()],

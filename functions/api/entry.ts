@@ -1,10 +1,6 @@
 /// <reference types="@cloudflare/workers-types" />
-//
-// POST /api/entry, promotion entry endpoint (Cloudflare Pages Function).
-//
-// Flow: verify Turnstile → validate → insert into D1 (critical) →
-// send Brevo confirmation email + upsert contact (best-effort, background) → redirect.
-// TODO (later): photo → R2.
+
+import { confirmationEmailHtml } from "./_emails.generated";
 
 interface Env {
   DB: D1Database;
@@ -107,6 +103,13 @@ async function uploadPhoto(env: Env, file: File, id: string): Promise<string> {
   return key;
 }
 
+// Escape user-supplied values before substituting them into email HTML.
+function escapeHtml(s: string): string {
+  return s.replace(/[&<>"']/g, (c) =>
+    c === "&" ? "&amp;" : c === "<" ? "&lt;" : c === ">" ? "&gt;" : c === '"' ? "&quot;" : "&#39;"
+  );
+}
+
 async function sendConfirmationEmail(env: Env, e: Entry): Promise<void> {
   const firstName = e.parent_name.split(/\s+/)[0] || "there";
   const to = [{ email: e.email, name: e.parent_name }];
@@ -114,21 +117,16 @@ async function sendConfirmationEmail(env: Env, e: Entry): Promise<void> {
 
   // Preferred: a Brevo-managed template (responsive, editable by marketers).
   // The template should reference {{ params.firstName }} and {{ params.squad }}.
-  // Fallback: inline HTML, used until BREVO_TEMPLATE_ID is configured.
+  // Fallback: the MJML-compiled email (emails/confirmation.mjml), used until BREVO_TEMPLATE_ID is set.
   const payload = Number.isFinite(templateId)
     ? { to, templateId, params: { firstName, squad: e.squad_name } }
     : {
         sender: { name: "Bright July", email: "noreply@brightjuly.com.au" },
         to,
         subject: "Your Bright July entry is in 🌞",
-        htmlContent: `<!doctype html><html><body style="margin:0;background:#FAF6EF;font-family:Arial,Helvetica,sans-serif;color:#3A332B">
-    <div style="max-width:560px;margin:0 auto;padding:32px 24px">
-      <h1 style="font-size:24px;color:#1F1B16;margin:0 0 16px">Thanks for entering Bright July, ${firstName}!</h1>
-      <p style="font-size:15px;line-height:1.6;margin:0 0 12px">We've received your entry for squad <strong>${e.squad_name}</strong>.</p>
-      <p style="font-size:15px;line-height:1.6;margin:0 0 12px">Keep getting outdoors and come back next week with another moment, winners are announced each Monday during July.</p>
-      <p style="font-size:15px;line-height:1.6;margin:0 0 12px">Share your outdoor moment with <strong>#brightjulyAU</strong> and tag <strong>@brightjulyAU</strong>.</p>
-      <p style="font-size:14px;color:#6E6357;margin:24px 0 0">The Bright July team</p>
-    </div></body></html>`,
+        htmlContent: confirmationEmailHtml
+          .replaceAll("{{firstName}}", escapeHtml(firstName))
+          .replaceAll("{{squadName}}", escapeHtml(e.squad_name)),
       };
 
   const res = await fetch("https://api.brevo.com/v3/smtp/email", {
